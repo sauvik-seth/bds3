@@ -1,0 +1,286 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 font-poppins;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Performance optimizations */
+  .spline-container {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    contain: layout style paint;
+  }
+
+  /* Reduce repaints */
+  .transform {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Optimize animations */
+  .transition-all {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+
+  /* Disable animations on scroll for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Force hardware acceleration */
+  .hero-section {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Optimize iframe performance */
+  iframe {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+@layer components {
+  .glass-morphism {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .rainbow-gradient {
+    background: linear-gradient(
+      45deg,
+      #ff69b4,
+      #ffd700,
+      #32cd32,
+      #4a90e2,
+      #9370db
+    );
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease infinite;
+  }
+
+  .text-gradient {
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    @apply px-8 py-3 text-white font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105 relative overflow-hidden;
+    background: linear-gradient(to right, #a855f7, #7c3aed);
+  }
+
+  .btn-primary::before {
+    content: "";
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(to right, #c084fc, #9333ea, #6b21a8);
+  }
+
+  .btn-primary:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-3 font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105;
+    border: 2px solid #a855f7;
+    color: #a855f7;
+  }
+
+  .btn-secondary:hover {
+    background-color: #a855f7;
+    color: white;
+  }
+
+  .rainbow-stripe {
+    @apply absolute top-0 left-0 h-full transition-all duration-500 ease-in-out;
+  }
+
+  .stripe-1 {
+    @apply bg-pink w-full;
+    margin-right: 30px;
+  }
+
+  .stripe-2 {
+    @apply bg-yellow w-full;
+    margin-right: 22px;
+  }
+
+  .stripe-3 {
+    @apply bg-green w-full;
+    margin-right: 15px;
+  }
+
+  .stripe-4 {
+    @apply bg-blue w-full;
+    margin-right: 8px;
+  }
+
+  .stripe-5 {
+    @apply bg-purple w-full;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes rainbowWipe {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes hamburgerRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes textReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+/* Hide Spline watermark */
+iframe[src*="spline.design"] {
+  position: relative;
+}
+
+/* Add this to your global stylesheet (e.g., globals.css) */
+
+.noise-bg {
+  position: relative;
+  /* Ensure the pseudo-element is contained */
+  isolation: isolate;
+}
+
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* Pointer events none so it doesn't interfere with interactions */
+  pointer-events: none;
+
+  /* The magic: SVG filter for generating noise */
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+
+  /* Adjust opacity to make the noise more or less subtle */
+  opacity: 0.08;
+}
+
+/* Text shadow for better readability on vibrant backgrounds */
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.text-shadow-sm {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+iframe[src*="spline.design"]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  height: 20px;
+  background: black;
+  z-index: 10;
+}
+
+/* Alternative method to hide watermark */
+.spline-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.spline-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: 25px;
+  background: black;
+  z-index: 10;
+}
