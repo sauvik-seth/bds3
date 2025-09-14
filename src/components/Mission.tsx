@@ -41,26 +41,15 @@ export default function Mission() {
       <div className="container mx-auto">
         <div className="sticky top-28 md:top-32">
           <div className="flex justify-center">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl text-center font-bold mt-10">
-              Our <span className="text-purple-500">Mission</span>
-            </h1>
+            <h2 className="text-5xl font-bold mt-6 mb-4">
+              Our{" "}
+              <span className="text-[#A855F7] relative">
+                Mission
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#A855F7] to-transparent"></span>
+              </span>{" "}
+            </h2>
           </div>
-          <div className="flex justify-center">
-            <svg
-              width="200"
-              height="20"
-              viewBox="0 0 200 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10 10 C 50 30, 150 0, 190 10"
-                stroke="purple"
-                strokeWidth="4"
-                fill="none"
-              />
-            </svg>
-          </div>
+          <div className="flex justify-center"></div>
           <div className="text-2xl md:text-4xl lg:text-5xl text-center font-medium mt-10 ">
             <span className="text-gray-300">
               {words.map((word, wordIndex) => (

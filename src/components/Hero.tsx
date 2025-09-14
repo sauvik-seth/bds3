@@ -1,184 +1,317 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import Pointer from "./Pointer";
+import { motion, useAnimate } from "framer-motion";
+import { useEffect, useState } from "react";
 
-const Hero: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [loadSpline, setLoadSpline] = useState(false);
+// Custom cursor SVG inline (black + purple accent for light theme)
+const cursorSvgData = `data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 4L12 20L8 21L7 25L4 4Z' stroke='black' stroke-width='2' fill='%23A855F7'/%3E%3C/svg%3E`;
+
+const PLAY_STORE_URL = "";
+
+export default function Hero() {
+  const [leftDesignScope, leftDesignAnimate] = useAnimate();
+  const [leftPointerScope, leftPointerAnimate] = useAnimate();
+  const [rightDesignScope, rightDesignAnimate] = useAnimate();
+  const [rightPointerScope, rightPointerAnimate] = useAnimate();
+  const [buttonHovered, setButtonHovered] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
-
-    // Lazy load spline only when near viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setLoadSpline(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    const hero = document.querySelector(".spline-container");
-    if (hero) observer.observe(hero);
-
-    return () => observer.disconnect();
+    setIsMounted(true);
+    return () => setIsMounted(false);
   }, []);
 
+  useEffect(() => {
+    if (!isMounted) return;
+
+    const runAnimations = () => {
+      if (
+        !leftDesignScope.current ||
+        !leftPointerScope.current ||
+        !rightDesignScope.current ||
+        !rightPointerScope.current
+      ) {
+        return;
+      }
+
+      try {
+        // Left pointer animation first
+        leftPointerAnimate([
+          [leftPointerScope.current, { opacity: 1 }, { duration: 0.5 }],
+          [leftPointerScope.current, { y: 0, x: -100 }, { duration: 0.5 }],
+          [
+            leftPointerScope.current,
+            { y: [0, 16, 0], x: 0 },
+            { duration: 0.5, ease: "easeInOut" },
+          ],
+        ]);
+
+        // Left image follows the pointer
+        leftDesignAnimate([
+          [
+            leftDesignScope.current,
+            { opacity: 1 },
+            { duration: 0.5, delay: 0.3 },
+          ],
+          [leftDesignScope.current, { y: 0, x: 0 }, { duration: 0.5 }],
+        ]);
+
+        // Right pointer animation with delay
+        rightPointerAnimate([
+          [
+            rightPointerScope.current,
+            { opacity: 1 },
+            { duration: 0.5, delay: 1.5 },
+          ],
+          [rightPointerScope.current, { y: 0, x: 175 }, { duration: 0.5 }],
+          [
+            rightPointerScope.current,
+            { y: [0, 20, 0], x: 0 },
+            { duration: 0.5, ease: "easeInOut" },
+          ],
+        ]);
+
+        // Right image follows the pointer
+        rightDesignAnimate([
+          [
+            rightDesignScope.current,
+            { opacity: 1 },
+            { duration: 0.5, delay: 1.8 },
+          ],
+          [rightDesignScope.current, { y: 0, x: 0 }, { duration: 0.5 }],
+        ]);
+      } catch (error) {
+        console.error("Animation error:", error);
+      }
+    };
+
+    setTimeout(runAnimations, 100);
+  }, [
+    isMounted,
+    leftDesignAnimate,
+    leftPointerAnimate,
+    rightDesignAnimate,
+    rightPointerAnimate,
+    leftDesignScope,
+    leftPointerScope,
+    rightDesignScope,
+    rightPointerScope,
+  ]);
+
+  const handleDownload = () => {
+    if (typeof window !== "undefined") {
+      window.open(PLAY_STORE_URL, "_blank");
+    }
+  };
+
   return (
-    <section className="hero-section relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 bg-black">
-      {/* Animated Background Graphics - Hidden */}
-      <div className="absolute inset-0 overflow-hidden opacity-0">
-        {/* Floating Circles */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-pink/30 rounded-full animate-float" />
-        <div
-          className="absolute top-40 right-20 w-24 h-24 bg-blue/30 rounded-full animate-float"
-          style={{ animationDelay: "1s" }}
-        />
-        <div
-          className="absolute bottom-40 left-1/4 w-40 h-40 bg-yellow/30 rounded-full animate-float"
-          style={{ animationDelay: "2s" }}
-        />
-        <div
-          className="absolute bottom-20 right-1/3 w-28 h-28 bg-green/30 rounded-full animate-float"
-          style={{ animationDelay: "0.5s" }}
-        />
-
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-pink/20 to-blue/20 rounded-full blur-3xl animate-pulse" />
-        <div
-          className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-yellow/20 to-purple/20 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "1s" }}
-        />
-
-        {/* Stars */}
-        <div className="absolute top-10 left-1/4 w-2 h-2 bg-white rounded-full animate-pulse" />
-        <div
-          className="absolute top-32 right-1/3 w-1 h-1 bg-pink rounded-full animate-pulse"
-          style={{ animationDelay: "0.5s" }}
-        />
-        <div
-          className="absolute top-60 left-1/2 w-1.5 h-1.5 bg-blue rounded-full animate-pulse"
-          style={{ animationDelay: "1.5s" }}
-        />
-        <div
-          className="absolute bottom-32 right-1/4 w-2 h-2 bg-yellow rounded-full animate-pulse"
-          style={{ animationDelay: "2s" }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pt-16">
-        {/* Notice Badge */}
-        <div
-          className={`inline-block px-6 py-2 text-white rounded-full text-sm font-semibold mb-8 transform transition-all duration-300 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-          style={{ background: "linear-gradient(to right, #A855F7, #7C3AED)" }}
+    <section
+      id="home"
+      className="py-24 overflow-hidden bg-white text-black min-h-screen flex items-center"
+      style={
+        isMounted
+          ? {
+              cursor: `url(${cursorSvgData}), auto`,
+            }
+          : {}
+      }
+    >
+      <div className="container mx-auto px-4 relative w-full">
+        {/* Left image */}
+        <motion.div
+          ref={leftDesignScope}
+          initial={{ opacity: 0, y: 100, x: -100 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          className="absolute left-0 xl:left-8 top-16 hidden lg:block cursor-grab active:cursor-grabbing z-10"
+          drag
         >
-          🏳️‍⚧️ Standing Up for Trans Rights
-        </div>
+          <img
+            draggable={false}
+            src="/customimage1.png"
+            alt="Advocacy Visual"
+            width={310}
+            height={439}
+            className="pointer-events-none"
+          />
+        </motion.div>
 
-        {/* Main Heading */}
-        <h1
-          className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 transform transition-all duration-300 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-          style={{ animationDelay: "50ms" }}
+        {/* Community pointer - moved further right to avoid overlap */}
+        <motion.div
+          ref={leftPointerScope}
+          initial={{ opacity: 0, y: 100, x: -200 }}
+          className="absolute top-96 hidden lg:block z-20"
+          style={{
+            left: "calc(14rem + 120px)", // shifted more right than before
+          }}
         >
-          <span className="text-gradient font-accent">Standing Up for</span>
-          <br />
-          <span className="text-white">Trans Rights</span>
-        </h1>
+          <Pointer name="Community" />
+        </motion.div>
 
-        {/* Subheading */}
-        <p
-          className={`text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed px-4 transform transition-all duration-300 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-          style={{ animationDelay: "100ms" }}
+        {/* Right image */}
+        <motion.div
+          initial={{ opacity: 0, y: 100, x: 100 }}
+          ref={rightDesignScope}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          className="absolute right-0 xl:right-8 -top-16 hidden lg:block cursor-grab active:cursor-grabbing z-10"
+          drag
         >
-          Our organization is dedicated to advocating for the rights of
-          transgender individuals, working to break down barriers and promote
-          equality in all areas of life.
-        </p>
+          <img
+            draggable={false}
+            src="/customimage2.png"
+            alt="Support Visual"
+            width={310}
+            height={439}
+            className="pointer-events-none"
+          />
+        </motion.div>
 
-        {/* Call-to-Action Buttons */}
-        <div
-          className={`flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 transform transition-all duration-300 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-          style={{ animationDelay: "150ms", marginBottom: "0.25rem" }} // tighter gap
+        <motion.div
+          ref={rightPointerScope}
+          initial={{ opacity: 0, x: 275, y: 100 }}
+          className="absolute -top-4 right-80 xl:right-96 hidden lg:block z-20"
         >
-          <button className="btn-primary group relative w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3">
-            <span className="relative z-10">Get Involved</span>
+          <Pointer color="blue" name="Rights" />
+        </motion.div>
+
+        {/* Main content */}
+        <div className="flex flex-col items-center justify-center text-center relative z-30 max-w-5xl mx-auto">
+          {/* Badge with LGBTQ gradient and noise */}
+          <div className="relative inline-flex py-1 px-3 rounded-full text-white font-semibold mb-8 overflow-hidden">
+            {/* LGBTQ gradient background */}
             <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"
+              className="absolute inset-0 opacity-90"
               style={{
                 background:
-                  "linear-gradient(to right, #C084FC, #9333EA, #6B21A8)",
+                  "linear-gradient(to right,#EF4444, #F97316, #FCD34D, #22C55E, #3B82F6, #4F46E5, #9333EA)",
               }}
-            />
-          </button>
+            ></div>
 
-          <button className="btn-secondary group w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3">
-            <span className="relative z-10">Learn More</span>
-          </button>
-        </div>
+            {/* Noise overlay */}
+            <div
+              className="absolute inset-0 opacity-20 mix-blend-overlay"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E")`,
+                backgroundSize: "100px 100px",
+              }}
+            ></div>
 
-        {/* 3D Globe */}
-        <div
-          className={`w-full max-w-7xl mx-auto transform transition-all duration-300 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-          style={{ animationDelay: "200ms", marginTop: "-12rem" }} // 👈 pulls globe up
-        >
-          <div className="spline-container relative w-full h-[600px] sm:h-[750px] md:h-[900px] lg:h-[1050px] xl:h-[1200px] 2xl:h-[1350px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl pointer-events-none">
-            {loadSpline ? (
-              <iframe
-                src="https://my.spline.design/3dglobe-e6L3Vtyz5ohjCANfHHkiMmGx/"
-                frameBorder="0"
-                width="100%"
-                height="100%"
-                className="w-full h-full pointer-events-none"
-                title="3D Globe"
-                loading="lazy"
-                style={{ pointerEvents: "none" }}
-              />
-            ) : (
-              // Lightweight placeholder until spline loads
-              <div className="w-full h-full bg-gradient-to-b from-purple-900 via-indigo-900 to-black animate-pulse" />
-            )}
-            {/* Watermark overlay to hide "Built with Spline" */}
-            <div className="absolute bottom-0 right-0 w-32 h-8 bg-black z-10"></div>
+            {/* Text */}
+            <span className="relative z-10">
+              🏳️‍⚧️ Standing Up for Trans Rights
+            </span>
           </div>
-        </div>
 
-        {/* Mac Window Container for Hero Image */}
-        <div className="relative z-20 -mt-[50rem] w-[100%] max-w-6xl mx-auto rounded-xl overflow-hidden shadow-2xl">
-          {/* Mac Title Bar */}
-          <div className="flex items-center h-8 px-4 bg-gray-700 rounded-t-xl">
-            {/* Mac Buttons */}
-            <div className="flex space-x-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
-            </div>
-            {/* Tab Title */}
-            <div className="flex-grow text-center text-sm text-gray-300">
-              Hero Image
-            </div>
+          {/* Heading with LGBTQ gradient for "for Everyone" */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
+            Equality{" "}
+            <span
+              className="relative inline-block"
+              style={{
+                background:
+                  "linear-gradient(45deg,  #5682B1, #FCC61D,#EA5B6F,#CC66DA, #FEA405, #FFCB61, #5E936C , #FFB4B4)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                position: "relative",
+              }}
+            >
+              for Everyone
+              {/* Noise overlay for text */}
+              <div
+                className="absolute inset-0 opacity-10"
+                style={{
+                  background: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter2)' opacity='0.6'/%3E%3C/svg%3E")`,
+                  backgroundSize: "80px 80px",
+                  mixBlendMode: "overlay",
+                }}
+              ></div>
+            </span>
+          </h1>
+
+          {/* Subheading */}
+          <p className="text-lg md:text-xl text-black/70 mt-8 max-w-2xl leading-relaxed">
+            Dedicated to advocating, educating, and creating a supportive
+            community for transgender individuals and allies.
+          </p>
+
+          {/* Button */}
+          <div className="mt-12">
+            <motion.div
+              className="group relative"
+              onMouseEnter={() => isMounted && setButtonHovered(true)}
+              onMouseLeave={() => isMounted && setButtonHovered(false)}
+            >
+              {/* Enhanced Glow with premium colors */}
+              {isMounted && (
+                <motion.div
+                  className="absolute inset-0 -z-10 rounded-xl opacity-40 blur-xl"
+                  style={{
+                    background:
+                      "linear-gradient(45deg, #ff6b9d, #4ecdc4, #ffe66d, #b4a7d6)",
+                  }}
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{
+                    opacity: buttonHovered ? 0.6 : 0.3,
+                    scale: buttonHovered ? 1.2 : 1,
+                  }}
+                  transition={{ duration: 0.4 }}
+                />
+              )}
+
+              <motion.button
+                onClick={isMounted ? handleDownload : undefined}
+                className="flex items-center bg-white border border-transparent px-7 py-5 rounded-xl text-white shadow-lg relative overflow-hidden"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Premium gradient background for button */}
+                <div
+                  className="absolute inset-0 opacity-90"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #B185DB, #FF85A1)",
+                  }}
+                ></div>
+
+                {/* Subtle noise overlay for button */}
+                <div
+                  className="absolute inset-0 opacity-20 mix-blend-soft-light"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='btnNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23btnNoise)' opacity='0.7'/%3E%3C/svg%3E")`,
+                    backgroundSize: "50px 50px",
+                  }}
+                ></div>
+
+                <div className="flex items-center relative z-10">
+                  <div
+                    className="bg-white/20 backdrop-blur-sm rounded-full p-2 mr-4 flex items-center justify-center border border-white/30"
+                    style={{ width: "40px", height: "40px" }}
+                  >
+                    {/* Icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="white"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                    >
+                      <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-xs text-black/80 font-medium">
+                      JOIN US
+                    </span>
+                    <span className="text-lg text-black/80 font-bold tracking-wide drop-shadow-sm">
+                      Get Involved
+                    </span>
+                  </div>
+                </div>
+              </motion.button>
+            </motion.div>
           </div>
-          {/* Image Content */}
-          <img
-            src="./hero_image.png"
-            alt="Organization covering image"
-            className="w-full h-[30rem] object-cover rounded-b-xl"
-          />
         </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}
