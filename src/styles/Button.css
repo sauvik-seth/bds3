@@ -1,0 +1,116 @@
+/* Button Styles */
+.donate-button {
+  all: unset;
+  position: relative;
+  display: inline-flex;
+  height: 3.5rem;
+  align-items: center;
+  border-radius: 9999px;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.06em;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.donate-button-bg {
+  overflow: hidden;
+  border-radius: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+  transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1px solid #FFD074;
+  background-color:#A855F7;
+}
+
+.donate-button-bg-layers {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: -60%;
+  aspect-ratio: 1 / 1;
+  width: max(200%, 10rem);
+  display: block;
+}
+
+.donate-button-bg-layer {
+  border-radius: 9999px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(0);
+  display: block;
+}
+
+.donate-button-bg-layer-1 {
+  background-color: #A374FF;
+}
+
+.donate-button-bg-layer-2 {
+  background-color: #17F1D1;
+}
+
+.donate-button-bg-layer-3 {
+  background-color: #FFD074;
+}
+
+.donate-button-inner {
+  position: relative;
+  display: block;
+  pointer-events: none;
+}
+
+.donate-button-inner-static {
+  display: block;
+  pointer-events: none;
+}
+
+.donate-button-inner-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(70%);
+  display: block;
+  pointer-events: none;
+}
+
+.donate-button:hover .donate-button-inner-static {
+  opacity: 0;
+  transform: translateY(-70%);
+  transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
+}
+
+.donate-button:hover .donate-button-inner-hover {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.donate-button:hover .donate-button-bg-layer {
+  transition: transform 1.3s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
+}
+
+.donate-button:hover .donate-button-bg-layer-1 {
+  transform: scale(1);
+}
+
+.donate-button:hover .donate-button-bg-layer-2 {
+  transition-delay: 0.1s;
+  transform: scale(1);
+}
+
+.donate-button:hover .donate-button-bg-layer-3 {
+  transition-delay: 0.2s;
+  transform: scale(1);
+}

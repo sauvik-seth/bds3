@@ -1,0 +1,396 @@
+:root {
+  --sp: 1s;
+  --primary: #a855f7;
+  --primary-light: #b366f8;
+  --primary-lighter: #c078f9;
+  --primary-lightest: #cd8afa;
+  --primary-dark: #9644f5;
+  --primary-darker: #8533f3;
+  --primary-darkest: #7422f1;
+}
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 9999;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(116, 34, 241, 0.15) 0%,
+    rgba(20, 4, 40, 0.95) 70%,
+    #0a0214 100%
+  );
+}
+
+/* Grid Lines Background */
+.loader-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      rgba(168, 85, 247, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridShift 20s linear infinite;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+/* Ethereal purple waves */
+.loader-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(168, 85, 247, 0.3) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 80% 60%,
+      rgba(150, 68, 245, 0.25) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(192, 120, 249, 0.2) 0%,
+      transparent 45%
+    );
+  filter: blur(60px);
+  animation: etherealFlow 18s ease-in-out infinite;
+  z-index: -3;
+}
+
+/* Floating orbs with different sizes */
+.purple-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(205, 138, 250, 0.8),
+    rgba(168, 85, 247, 0.4),
+    rgba(116, 34, 241, 0.1)
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 60px rgba(168, 85, 247, 0.4),
+    inset 0 0 40px rgba(205, 138, 250, 0.2);
+  animation: orbitalFloat 20s ease-in-out infinite;
+}
+
+.purple-orb:nth-child(1) {
+  width: 200px;
+  height: 200px;
+  top: 15%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.purple-orb:nth-child(2) {
+  width: 120px;
+  height: 120px;
+  top: 60%;
+  right: 15%;
+  animation-delay: -7s;
+}
+
+.purple-orb:nth-child(3) {
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: 70%;
+  animation-delay: -14s;
+}
+
+/* Pulsing energy rings */
+.energy-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(168, 85, 247, 0.6);
+  background: radial-gradient(
+    circle,
+    transparent 60%,
+    rgba(168, 85, 247, 0.1) 80%,
+    rgba(150, 68, 245, 0.2) 100%
+  );
+  animation: energyPulse 8s ease-in-out infinite;
+}
+
+.energy-ring:nth-child(4) {
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 0s;
+}
+
+.energy-ring:nth-child(5) {
+  width: 600px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -2s;
+}
+
+.energy-ring:nth-child(6) {
+  width: 800px;
+  height: 800px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -4s;
+}
+
+/* Geometric purple fragments */
+.fragment {
+  position: absolute;
+  background: linear-gradient(
+    135deg,
+    rgba(192, 120, 249, 0.7),
+    rgba(168, 85, 247, 0.5)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(205, 138, 250, 0.4);
+  animation: fragmentDrift 25s linear infinite;
+}
+
+.fragment:nth-child(7) {
+  width: 60px;
+  height: 60px;
+  top: 25%;
+  left: 80%;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  animation-delay: 0s;
+}
+
+.fragment:nth-child(8) {
+  width: 40px;
+  height: 40px;
+  top: 70%;
+  left: 20%;
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  animation-delay: -8s;
+}
+
+.fragment:nth-child(9) {
+  width: 30px;
+  height: 30px;
+  top: 40%;
+  right: 30%;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  animation-delay: -16s;
+}
+
+/* Revolutionary content design */
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.05) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+} /* Logo container - circular background with padding */
+.logo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  width: 140px; /* Increased width for padding */
+  height: 140px; /* Increased height for padding */
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.2) 0%,
+    rgba(168, 85, 247, 0.1) 50%,
+    transparent 100%
+  );
+  border-radius: 50%; /* Back to full circle */
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.4),
+    inset 0 0 20px rgba(205, 138, 250, 0.1);
+  animation: logoGlow 3s ease-in-out infinite alternate;
+  padding: 20px; /* Padding around the logo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo image - no cropping, preserve aspect ratio */
+.logo-container img {
+  width: 100px; /* Fixed width */
+  height: 100px; /* Fixed height */
+  object-fit: contain; /* Prevents cropping */
+  border-radius: 8px; /* Subtle rounded corners for the logo itself */
+  border: 1px solid rgba(205, 138, 250, 0.3);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+  background: rgba(255, 255, 255, 0.05); /* Subtle background for contrast */
+}
+
+/* Spiral Wave Loader - positioned around logo */
+.spiral-loader {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.spiral-wave {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top: 3px solid var(--primary);
+  animation: spiralSpin 2s linear infinite;
+}
+
+.spiral-wave:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  top: 0;
+  left: 0;
+  border-top-color: var(--primary);
+  animation-delay: 0s;
+}
+
+.spiral-wave:nth-child(2) {
+  width: 250px;
+  height: 250px;
+  top: 25px;
+  left: 25px;
+  border-top-color: var(--primary-light);
+  animation-delay: -0.3s;
+}
+
+.spiral-wave:nth-child(3) {
+  width: 200px;
+  height: 200px;
+  top: 50px;
+  left: 50px;
+  border-top-color: var(--primary-lighter);
+  animation-delay: -0.6s;
+}
+
+.spiral-wave:nth-child(4) {
+  width: 150px;
+  height: 150px;
+  top: 75px;
+  left: 75px;
+  border-top-color: var(--primary-lightest);
+  animation-delay: -0.9s;
+}
+
+/* Animations */
+@keyframes gridShift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+@keyframes logoGlow {
+  0% {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.4),
+      inset 0 0 20px rgba(205, 138, 250, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(168, 85, 247, 0.8),
+      inset 0 0 30px rgba(205, 138, 250, 0.3);
+  }
+}
+
+@keyframes etherealFlow {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.8;
+  }
+  33% {
+    transform: translateY(-30px) rotate(120deg);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translateY(20px) rotate(240deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes orbitalFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(50px, -80px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translate(-30px, -60px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translate(-60px, 40px) rotate(270deg) scale(1.05);
+  }
+}
+
+@keyframes energyPulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.3;
+    border-color: rgba(168, 85, 247, 0.8);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.1;
+    border-color: rgba(205, 138, 250, 0.4);
+  }
+}
+
+@keyframes fragmentDrift {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes spiralSpin {
+  0% {
+    transform: rotate(0deg);
+    border-top-width: 3px;
+  }
+  50% {
+    border-top-width: 6px;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-top-width: 3px;
+  }
+}

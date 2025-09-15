@@ -8,6 +8,10 @@ const cursorSvgData = `data:image/svg+xml,%3Csvg width='32' height='32' viewBox=
 
 const PLAY_STORE_URL = "";
 
+// Change this to match the actual next section background,
+// or set it on the next section container as --next-section-bg.
+const NEXT_SECTION_BG = "#ffffff";
+
 export default function Hero() {
   const [leftDesignScope, leftDesignAnimate] = useAnimate();
   const [leftPointerScope, leftPointerAnimate] = useAnimate();
@@ -107,15 +111,45 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="py-24 overflow-hidden bg-white text-black min-h-screen flex items-center"
-      style={
-        isMounted
-          ? {
-              cursor: `url(${cursorSvgData}), auto`,
-            }
-          : {}
-      }
+      // Expose the next-section color as a CSS variable for the fader.
+      style={{ ["--next-section-bg" as any]: NEXT_SECTION_BG }}
+      className="relative py-24 overflow-hidden bg-white text-black min-h-screen flex items-center"
     >
+      {/* Animated liquid gradient backdrop (bottom) */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[65vh] z-0"
+        initial={{ opacity: 0.9 }}
+        style={{
+          // A vivid multi-color gradient that we animate by shifting background-position.
+          background:
+            "linear-gradient(120deg, rgba(255,107,157,0.75), rgba(78,205,196,0.75), rgba(255,214,61,0.75), rgba(180,167,214,0.75))",
+          backgroundSize: "200% 100%",
+          filter: "blur(80px)",
+          // Keep a top fade so the gradient rolls off into the hero content.
+          maskImage: "linear-gradient(to top, black 70%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to top, black 70%, transparent 100%)",
+        }}
+        animate={{
+          opacity: 1,
+          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Bottom edge fader to blend into the next section */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[140px] z-20"
+        style={{
+          // Transparent to the exact next section color for a seamless seam.
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--next-section-bg, #ffffff) 90%)",
+        }}
+      />
+
+      {/* Content layer above decorative backgrounds */}
       <div className="container mx-auto px-4 relative w-full">
         {/* Left image */}
         <motion.div
@@ -127,7 +161,7 @@ export default function Hero() {
         >
           <img
             draggable={false}
-            src="/customimage1.png"
+            src="/customimage1.webp"
             alt="Advocacy Visual"
             width={310}
             height={439}
@@ -135,14 +169,12 @@ export default function Hero() {
           />
         </motion.div>
 
-        {/* Community pointer - moved further right to avoid overlap */}
+        {/* Community pointer */}
         <motion.div
           ref={leftPointerScope}
           initial={{ opacity: 0, y: 100, x: -200 }}
           className="absolute top-96 hidden lg:block z-20"
-          style={{
-            left: "calc(14rem + 120px)", // shifted more right than before
-          }}
+          style={{ left: "calc(14rem + 120px)" }}
         >
           <Pointer name="Community" />
         </motion.div>
@@ -157,7 +189,7 @@ export default function Hero() {
         >
           <img
             draggable={false}
-            src="/customimage2.png"
+            src="/customimage2.webp"
             alt="Support Visual"
             width={310}
             height={439}
@@ -177,31 +209,26 @@ export default function Hero() {
         <div className="flex flex-col items-center justify-center text-center relative z-30 max-w-5xl mx-auto">
           {/* Badge with LGBTQ gradient and noise */}
           <div className="relative inline-flex py-1 px-3 rounded-full text-white font-semibold mb-8 overflow-hidden">
-            {/* LGBTQ gradient background */}
             <div
               className="absolute inset-0 opacity-90"
               style={{
                 background:
                   "linear-gradient(to right,#EF4444, #F97316, #FCD34D, #22C55E, #3B82F6, #4F46E5, #9333EA)",
               }}
-            ></div>
-
-            {/* Noise overlay */}
+            />
             <div
               className="absolute inset-0 opacity-20 mix-blend-overlay"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E")`,
                 backgroundSize: "100px 100px",
               }}
-            ></div>
-
-            {/* Text */}
+            />
             <span className="relative z-10">
               🏳️‍⚧️ Standing Up for Trans Rights
             </span>
           </div>
 
-          {/* Heading with LGBTQ gradient for "for Everyone" */}
+          {/* Heading with gradient text */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
             Equality{" "}
             <span
@@ -216,7 +243,6 @@ export default function Hero() {
               }}
             >
               for Everyone
-              {/* Noise overlay for text */}
               <div
                 className="absolute inset-0 opacity-10"
                 style={{
@@ -224,11 +250,10 @@ export default function Hero() {
                   backgroundSize: "80px 80px",
                   mixBlendMode: "overlay",
                 }}
-              ></div>
+              />
             </span>
           </h1>
 
-          {/* Subheading */}
           <p className="text-lg md:text-xl text-black/70 mt-8 max-w-2xl leading-relaxed">
             Dedicated to advocating, educating, and creating a supportive
             community for transgender individuals and allies.
@@ -241,7 +266,6 @@ export default function Hero() {
               onMouseEnter={() => isMounted && setButtonHovered(true)}
               onMouseLeave={() => isMounted && setButtonHovered(false)}
             >
-              {/* Enhanced Glow with premium colors */}
               {isMounted && (
                 <motion.div
                   className="absolute inset-0 -z-10 rounded-xl opacity-40 blur-xl"
@@ -264,30 +288,26 @@ export default function Hero() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {/* Premium gradient background for button */}
                 <div
                   className="absolute inset-0 opacity-90"
                   style={{
                     background:
                       "linear-gradient(90deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #B185DB, #FF85A1)",
                   }}
-                ></div>
-
-                {/* Subtle noise overlay for button */}
+                />
                 <div
                   className="absolute inset-0 opacity-20 mix-blend-soft-light"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='btnNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23btnNoise)' opacity='0.7'/%3E%3C/svg%3E")`,
                     backgroundSize: "50px 50px",
                   }}
-                ></div>
+                />
 
                 <div className="flex items-center relative z-10">
                   <div
                     className="bg-white/20 backdrop-blur-sm rounded-full p-2 mr-4 flex items-center justify-center border border-white/30"
                     style={{ width: "40px", height: "40px" }}
                   >
-                    {/* Icon */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="white"

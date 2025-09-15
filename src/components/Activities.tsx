@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Button.css";
 
 const Activities: React.FC = () => {
   return (
@@ -68,12 +69,13 @@ const Activities: React.FC = () => {
 
         .photo__name {
           text-transform: uppercase;
-          font-size: 40px;
+          font-size: 30px;
+          line-height: 1.2;
           letter-spacing: 2px;
           color: transparent;
           -webkit-text-stroke-width: 1px;
           -webkit-text-stroke-color: #111111;
-          margin-top: -25px;
+          margin-top: -20px;
           transition: 0.3s ease-in-out 0.2s;
           position: relative;
           width: 100%;
@@ -100,13 +102,36 @@ const Activities: React.FC = () => {
       >
         {/* Title */}
         <div className="relative z-10 max-w-6xl mx-auto text-center">
-          <h2 className="text-5xl font-bold mt-6 mb-10">
+          <h2 className="text-5xl font-bold mt-6 mb-0">
             Our{" "}
             <span className="text-[#A855F7] relative">
               Activities
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#A855F7] to-transparent"></span>
             </span>
           </h2>
+          <p className="mt-4 mb-4 text-lg text-gray-700 max-w-3xl mx-auto">
+            Standing with LGBTQ+ community Discover how our platform has
+            transformed the way people connect and share their stories. Real
+            experiences from real people.
+          </p>
+        </div>
+        <div className="text-center mt-8 mb-16">
+          <button
+            onClick={() => (window.location.href = "/all-programs")}
+            className="donate-button"
+          >
+            <span className="donate-button-bg">
+              <span className="donate-button-bg-layers">
+                <span className="donate-button-bg-layer donate-button-bg-layer-1"></span>
+                <span className="donate-button-bg-layer donate-button-bg-layer-2"></span>
+                <span className="donate-button-bg-layer donate-button-bg-layer-3"></span>
+              </span>
+            </span>
+            <span className="donate-button-inner">
+              <span className="donate-button-inner-static">All Programs</span>
+              <span className="donate-button-inner-hover">All Programs</span>
+            </span>
+          </button>
         </div>
 
         {/* Four animated vertical strips (all images already added previously) */}
@@ -117,47 +142,47 @@ const Activities: React.FC = () => {
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/book1.jpeg"
+                    src="activities/book1.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">BOOK1</div>
+                <div className="photo__name">Book fair & calendar gifting</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/book2.jpeg"
+                    src="activities/book2.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">BOOK2</div>
+                <div className="photo__name">Book fair & calendar gifting</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/book3.jpeg"
+                    src="activities/book3.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">BOOK3</div>
+                <div className="photo__name">Book fair & calendar gifting</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg1.jpeg" alt="see the attached image" />
+                  <img src="activities/cg1.webp" alt="see the attached image" />
                 </div>
-                <div className="photo__name">CG1</div>
+                <div className="photo__name">Calender Gifting</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg2.jpeg" alt="see the attached image" />
+                  <img src="activities/cg2.webp" alt="see the attached image" />
                 </div>
-                <div className="photo__name">CG2</div>
+                <div className="photo__name">Calender Gifting</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg3.jpeg" alt="see the attached image" />
+                  <img src="activities/cg3.webp" alt="see the attached image" />
                 </div>
-                <div className="photo__name">CG3</div>
+                <div className="photo__name">Calender Gifting</div>
               </div>
             </div>
           </div>
@@ -167,39 +192,51 @@ const Activities: React.FC = () => {
             <div className="gallery__strip two">
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg4.jpeg" alt="see the attached image" />
+                  <img src="activities/cg4.webp" alt="see the attached image" />
                 </div>
-                <div className="photo__name">CG4</div>
+                <div className="photo__name">Calender Gifting</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg5.jpeg" alt="see the attached image" />
+                  <img src="activities/cg5.webp" alt="see the attached image" />
                 </div>
-                <div className="photo__name">CG5</div>
+                <div className="photo__name">Calender Gifting</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg6.jpeg" alt="see the attached image" />
+                  <img
+                    src="activities/tdov1.webp"
+                    alt="see the attached image"
+                  />
                 </div>
-                <div className="photo__name">CG6</div>
+                <div className="photo__name">Transgender Day of Visibility</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg7.jpeg" alt="see the attached image" />
+                  <img
+                    src="activities/tdov2.webp"
+                    alt="see the attached image"
+                  />
                 </div>
-                <div className="photo__name">CG7</div>
+                <div className="photo__name">Transgender Day of Visibility</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg8.jpeg" alt="see the attached image" />
+                  <img
+                    src="activities/tdov3.webp"
+                    alt="see the attached image"
+                  />
                 </div>
-                <div className="photo__name">CG8</div>
+                <div className="photo__name">Transgender Day of Visibility</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/cg9.jpeg" alt="see the attached image" />
+                  <img
+                    src="activities/tdov4.webp"
+                    alt="see the attached image"
+                  />
                 </div>
-                <div className="photo__name">CG9</div>
+                <div className="photo__name">Transgender Day of Visibility</div>
               </div>
             </div>
           </div>
@@ -210,56 +247,56 @@ const Activities: React.FC = () => {
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/cg10.jpeg"
+                    src="activities/tdov5.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">CG10</div>
+                <div className="photo__name">Transgender Day of Visibility</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/legal1.jpeg"
+                    src="activities/legal1.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">LEGAL1</div>
+                <div className="photo__name">Legal Advocacy</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/legal2.jpeg"
+                    src="activities/legal2.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">LEGAL2</div>
+                <div className="photo__name">Legal Advocacy</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/legal3.jpeg"
+                    src="activities/legal3.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">LEGAL3</div>
+                <div className="photo__name">Legal Advocacy</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/legal4.jpeg"
+                    src="activities/legal4.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">LEGAL4</div>
+                <div className="photo__name">Legal Advocacy</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/legal5.jpeg"
+                    src="activities/legal5.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">LEGAL5</div>
+                <div className="photo__name">Legal Advocacy</div>
               </div>
             </div>
           </div>
@@ -270,47 +307,47 @@ const Activities: React.FC = () => {
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/mkrk1.jpeg"
+                    src="activities/mkrk1.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">MKRK1</div>
+                <div className="photo__name">Moner khoje rupantor kamira</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/mkrk2.jpeg"
+                    src="activities/mkrk2.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">MKRK2</div>
+                <div className="photo__name">Moner khoje rupantor kamira</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
                   <img
-                    src="activities/mkrk3.jpeg"
+                    src="activities/mkrk3.webp"
                     alt="see the attached image"
                   />
                 </div>
-                <div className="photo__name">MKRK3</div>
+                <div className="photo__name">Moner khoje rupantor kamira</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/sc1.jpeg" alt="see the attached image" />
+                  <img src="activities/sc1.webp" alt="see the attached image" />
                 </div>
-                <div className="photo__name">SC1</div>
+                <div className="photo__name">Street Corner Awareness</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/sc2.jpeg" alt="see the attached image" />
+                  <img src="activities/sc2.webp" alt="see the attached image" />
                 </div>
-                <div className="photo__name">SC2</div>
+                <div className="photo__name">Street Corner Awareness</div>
               </div>
               <div className="photo">
                 <div className="photo__image">
-                  <img src="activities/sc3.jpeg" alt="see the attached image" />
+                  <img src="activities/sc3.webp" alt="see the attached image" />
                 </div>
-                <div className="photo__name">SC3</div>
+                <div className="photo__name">Street Corner Awareness</div>
               </div>
             </div>
           </div>

@@ -41,7 +41,7 @@ export default function Mission() {
       <div className="container mx-auto">
         <div className="sticky top-28 md:top-32">
           <div className="flex justify-center">
-            <h2 className="text-5xl font-bold mt-6 mb-4">
+            <h2 className="text-5xl font-bold mt-6 mb-0">
               Our{" "}
               <span className="text-[#A855F7] relative">
                 Mission
@@ -49,6 +49,11 @@ export default function Mission() {
               </span>{" "}
             </h2>
           </div>
+          <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center">
+            Standing with LGBTQ+ community Discover how our platform has
+            transformed the way people connect and share their stories. Real
+            experiences from real people.
+          </p>
           <div className="flex justify-center"></div>
           <div className="text-2xl md:text-4xl lg:text-5xl text-center font-medium mt-10 ">
             <span className="text-gray-300">

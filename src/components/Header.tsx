@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Header: React.FC = () => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeMenuItem, setActiveMenuItem] = useState("About Us");
-  const [hoveredItem, setHoveredItem] = useState("About Us");
+  const [activeMenuItem, setActiveMenuItem] = useState("Home");
+  const [hoveredItem, setHoveredItem] = useState("Home");
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const menuItems = [
+    {
+      name: "Home",
+      href: "/",
+      showcase: {
+        type: "text",
+        content: "Welcome Home",
+        background:
+          "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      },
+    },
     {
       name: "About Us",
       href: "#about",
@@ -22,7 +34,7 @@ const Header: React.FC = () => {
     },
     {
       name: "Programmes",
-      href: "#programmes",
+      href: "/all-programs",
       showcase: {
         type: "text",
         content: "Explore our programs",
@@ -56,9 +68,10 @@ const Header: React.FC = () => {
     setHoveredItem(itemName);
   };
 
-  const handleMenuItemClick = (itemName: string) => {
+  const handleMenuItemClick = (itemName: string, href: string) => {
     setActiveMenuItem(itemName);
     setIsMenuOpen(false);
+    navigate(href);
   };
 
   // Prevent body scroll when menu is open
@@ -75,10 +88,9 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {/* Add Poppins Font + Hamburger Animation Styles + Donate Button Styles */}
+      {/* Add Poppins Font + Hamburger Animation Styles + Donate Button Styles + Cool Text Effect */}
       <style>{`
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
         .ham {
           cursor: pointer;
           -webkit-tap-highlight-color: transparent;
@@ -108,7 +120,6 @@ const Header: React.FC = () => {
         .ham1.active .bottom {
           stroke-dashoffset: -138px;
         }
-
         /* Donate Button Styles */
         .donate-button {
           all: unset;
@@ -127,7 +138,6 @@ const Header: React.FC = () => {
           background-color: transparent;
           cursor: pointer;
         }
-
         .donate-button-bg {
           overflow: hidden;
           border-radius: 2rem;
@@ -141,7 +151,6 @@ const Header: React.FC = () => {
           border: 1px solid #FFD074;
           background-color:#A855F7;
         }
-
         .donate-button-bg-layers {
           position: absolute;
           left: 50%;
@@ -151,7 +160,6 @@ const Header: React.FC = () => {
           width: max(200%, 10rem);
           display: block;
         }
-
         .donate-button-bg-layer {
           border-radius: 9999px;
           position: absolute;
@@ -162,30 +170,24 @@ const Header: React.FC = () => {
           transform: scale(0);
           display: block;
         }
-
         .donate-button-bg-layer-1 {
           background-color: #A374FF;
         }
-
         .donate-button-bg-layer-2 {
           background-color: #17F1D1;
         }
-
         .donate-button-bg-layer-3 {
           background-color: #FFD074;
         }
-
         .donate-button-inner {
           position: relative;
           display: block;
           pointer-events: none;
         }
-
         .donate-button-inner-static {
           display: block;
           pointer-events: none;
         }
-
         .donate-button-inner-hover {
           position: absolute;
           top: 0;
@@ -195,46 +197,110 @@ const Header: React.FC = () => {
           display: block;
           pointer-events: none;
         }
-
         .donate-button:hover .donate-button-inner-static {
           opacity: 0;
           transform: translateY(-70%);
           transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
         }
-
         .donate-button:hover .donate-button-inner-hover {
           opacity: 1;
           transform: translateY(0);
           transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
-
         .donate-button:hover .donate-button-bg-layer {
           transition: transform 1.3s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
         }
-
         .donate-button:hover .donate-button-bg-layer-1 {
           transform: scale(1);
         }
-
         .donate-button:hover .donate-button-bg-layer-2 {
           transition-delay: 0.1s;
           transform: scale(1);
         }
-
         .donate-button:hover .donate-button-bg-layer-3 {
           transition-delay: 0.2s;
           transform: scale(1);
+        }
+        /* Cool Text Hover Effect - Updated with larger fonts and proper sizing */
+        .cool-text-effect {
+          font-size: 3.5rem;
+          position: relative;
+          text-transform: uppercase;
+          transition: all 300ms ease;
+          width: fit-content;
+          cursor: pointer;
+          display: inline-block;
+          font-weight: 600;
+        }
+        .cool-text-effect:hover {
+          transform: skew(10deg);
+        }
+        .cool-text-effect::before {
+          content: attr(data-name);
+          position: absolute;
+          top: 0;
+          left: -20px;
+          background: white;
+          height: 2.8rem;
+          overflow: hidden;
+          transition: all 300ms ease;
+          padding-left: 20px;
+          color: #A855F7;
+          font-weight: 600;
+          font-size: inherit;
+          text-transform: uppercase;
+        }
+        .cool-text-effect:hover::before {
+          top: -3px;
+          left: 0px;
+          color: #A855F7;
+        }
+        .cool-text-effect::after {
+          content: "";
+          height: 4px;
+          width: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: #A855F7;
+          transition: all 300ms ease;
+        }
+        .cool-text-effect:hover::after {
+          width: 120%;
+          outline: 5px solid white;
+        }
+        /* Mobile responsive adjustments for cool text effect */
+        @media (max-width: 768px) {
+          .cool-text-effect {
+            font-size: 2.5rem;
+            line-height: 1.1;
+          }
+          
+          .cool-text-effect::before {
+            height: 2rem;
+          }
+        }
+        /* Tablet adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .cool-text-effect {
+            font-size: 3rem;
+          }
+          
+          .cool-text-effect::before {
+            height: 2.4rem;
+          }
         }
       `}</style>
 
       {/* Header */}
       <header
-        className="fixed top-0 left-1/2 -translate-x-1/2 z-50 bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg transition-opacity duration-300 w-[70%] mt-4 rounded-full"
+        className="fixed top-0 left-1/2 -translate-x-1/2 z-50 bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg transition-opacity duration-300 w-[85%] md:w-[70%] mt-4 rounded-full"
         style={{ fontFamily: "Poppins, sans-serif" }}
       >
         <div className="container mx-auto flex items-center justify-between h-20 px-4">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => navigate("/")}>
             <img src="/logo.png" alt="Logo" className="h-10" />
           </div>
 
@@ -325,7 +391,7 @@ const Header: React.FC = () => {
           >
             <div className="flex-1 pt-20 px-6 md:px-12 overflow-y-auto flex items-center justify-center">
               <nav className="w-full">
-                <ul className="space-y-4 md:space-y-0">
+                <ul className="space-y-2 md:space-y-1">
                   {menuItems.map((item, index) => (
                     <li key={item.name} className="group">
                       {/* Mobile Layout */}
@@ -334,28 +400,21 @@ const Header: React.FC = () => {
                           href={item.href}
                           onClick={(e) => {
                             e.preventDefault();
-                            handleMenuItemClick(item.name);
+                            handleMenuItemClick(item.name, item.href);
                           }}
                           onMouseEnter={() => handleMenuItemHover(item.name)}
-                          className={`relative block text-3xl font-semibold text-black py-6 transition-all duration-300 tracking-[0.1em] ${
-                            activeMenuItem === item.name
-                              ? "text-purple-500"
-                              : ""
-                          }`}
+                          className="block py-3"
                         >
-                          <div className="flex items-center justify-center space-x-4">
-                            <span
-                              className={`text-3xl font-semibold text-gray-400 transition-opacity duration-300 tracking-[0.15em] ${
-                                hoveredItem === item.name
-                                  ? "opacity-100"
-                                  : "opacity-0"
-                              }`}
-                            >
-                              {String(index + 1).padStart(2, "0")}
-                            </span>
-                            <span>{item.name}</span>
-                          </div>
-                          <span className="absolute bottom-4 left-1/2 transform -translate-x-1/2 h-0.5 bg-black w-0 group-hover:w-20 transition-all duration-300"></span>
+                          <span
+                            className={`cool-text-effect ${
+                              activeMenuItem === item.name
+                                ? "text-purple-500"
+                                : "text-black"
+                            }`}
+                            data-name={item.name}
+                          >
+                            {item.name}
+                          </span>
                         </a>
                       </div>
 
@@ -363,7 +422,7 @@ const Header: React.FC = () => {
                       <div className="hidden md:flex items-center">
                         <div className="w-20 overflow-hidden">
                           <span
-                            className={`block text-4xl font-medium text-gray-400 transition-transform duration-300 tracking-wide ${
+                            className={`block text-5xl font-medium text-gray-400 transition-transform duration-300 tracking-wide ${
                               hoveredItem === item.name
                                 ? "translate-y-0"
                                 : "translate-y-full"
@@ -376,17 +435,21 @@ const Header: React.FC = () => {
                           href={item.href}
                           onClick={(e) => {
                             e.preventDefault();
-                            handleMenuItemClick(item.name);
+                            handleMenuItemClick(item.name, item.href);
                           }}
                           onMouseEnter={() => handleMenuItemHover(item.name)}
-                          className={`relative block text-4xl font-medium text-black py-6 pl-20 transition-all duration-300 group-hover:translate-x-5 tracking-wider ${
-                            activeMenuItem === item.name
-                              ? "text-purple-500"
-                              : ""
-                          }`}
+                          className="block py-3 group"
                         >
-                          {item.name}
-                          <span className="absolute bottom-4 left-20 h-0.5 bg-black w-0 group-hover:w-full transition-all duration-300"></span>
+                          <span
+                            className={`cool-text-effect ${
+                              activeMenuItem === item.name
+                                ? "text-purple-500"
+                                : "text-black"
+                            }`}
+                            data-name={item.name}
+                          >
+                            {item.name}
+                          </span>
                         </a>
                       </div>
                     </li>

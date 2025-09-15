@@ -58,7 +58,7 @@ export default function LGBTQTicker() {
   return (
     <section className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
-        <h2 className="text-5xl font-bold mt-6 mb-12 text-center">
+        <h2 className="text-5xl font-bold mt-0) mb-12 text-center">
           Standing with{" "}
           <span className="text-[#A855F7] relative">
             LGBTQ+
@@ -66,7 +66,10 @@ export default function LGBTQTicker() {
           </span>{" "}
           community
         </h2>
-
+        <p className="mt-8 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center">
+          Discover how our platform has transformed the way people connect and
+          share their stories. Real experiences from real people.
+        </p>
         <div className="relative">
           {/* Gradient masks for smooth edges */}
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>

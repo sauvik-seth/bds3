@@ -3,19 +3,14 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// Define a list of LGBTQ+ flag-inspired hex color codes for card backgrounds
-const lgbtqColors = [
-  "#FF0000", // Red (Life)
-  "#FF8C00", // Orange (Healing)
-  "#FFFF00", // Yellow (Sunlight)
-  "#008000", // Green (Nature)
-  "#0000FF", // Blue (Harmony/Serenity)
-  "#4B0082", // Indigo/Violet (Spirit)
-  "#EE82EE", // Violet (Transgender Flag)
-  "#F7A8B8", // Pink (Lesbian Flag)
-  "#D62828", // Red (Pansexual Flag)
-  "#FFD300", // Yellow (Pansexual Flag)
-  "#2684FE", // Blue (Pansexual Flag)
+// Define colors similar to the CSS example but adapted to your LGBTQ+ theme
+const cardColors = [
+  "rgba(163, 230, 53, 0.9)", // lime green
+  "rgba(251, 191, 36, 0.9)", // amber
+  "rgba(249, 168, 212, 0.9)", // pink
+  "rgba(147, 51, 234, 0.9)", // purple
+  "rgba(59, 130, 246, 0.9)", // blue
+  "rgba(34, 197, 94, 0.9)", // green
 ];
 
 const serviceCards = [
@@ -36,15 +31,15 @@ const serviceCards = [
   },
   {
     id: 3,
-    title: "Education & Awareness",
-    description: "Promoting understanding and acceptance through education.",
+    title: "Healthcare Access",
+    description: "Ensuring equitable access to affirming healthcare services.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
   },
   {
     id: 4,
-    title: "Healthcare Access",
-    description: "Ensuring equitable access to affirming healthcare services.",
+    title: "Education & Awareness",
+    description: "Promoting understanding and acceptance through education.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
   },
@@ -66,14 +61,6 @@ const serviceCards = [
   },
 ];
 
-// Helper: Convert hex to rgba
-const hexToRgba = (hex: string, alpha: number) => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-};
-
 type ServiceCardProps = {
   card: (typeof serviceCards)[number];
   i: number;
@@ -83,19 +70,18 @@ type ServiceCardProps = {
 
 function ServiceCard({ card, i, scrollYProgress, total }: ServiceCardProps) {
   const targetScale = 1 - (total - i) * 0.05;
-
   const scale = useTransform(scrollYProgress, [i / total, 1], [1, targetScale]);
-  const y = useTransform(
-    scrollYProgress,
-    [i / total, 1],
-    [0, (total - i) * 20]
-  );
 
-  const color1 = lgbtqColors[i % lgbtqColors.length];
-  const color2 = lgbtqColors[(i + 1) % lgbtqColors.length];
+  // Modified y transform - last card (highest index) moves up more
+  const yOffset = (total - i) * 30;
+  const y = useTransform(scrollYProgress, [i / total, 1], [0, yOffset]);
 
-  const rgbaColor1 = hexToRgba(color1, 0.4);
-  const rgbaColor2 = hexToRgba(color2, 0.4);
+  const headerColor = cardColors[i % cardColors.length];
+  // Extract RGB values for text color matching
+  const textColor = headerColor.replace("0.9", "1");
+
+  // Get the dot color (same as header color but with full opacity)
+  const dotColor = headerColor.replace("0.9", "0.6");
 
   return (
     <motion.div
@@ -103,44 +89,109 @@ function ServiceCard({ card, i, scrollYProgress, total }: ServiceCardProps) {
         scale,
         y,
         zIndex: i,
-        background: `linear-gradient(to bottom right, ${rgbaColor1}, ${rgbaColor2})`,
-        color: "white",
-        border: `1px solid ${hexToRgba(color1, 0.3)}`,
-        backdropFilter: "blur(10px) saturate(180%)",
-        WebkitBackdropFilter: "blur(10px) saturate(180%)",
       }}
-      className="sticky top-24 h-[70vh] w-full rounded-3xl shadow-xl p-8 flex flex-col items-center justify-center overflow-hidden transform-gpu"
+      className="sticky top-16 sm:top-20 md:top-24 h-[45vh] sm:h-[50vh] md:h-[55vh] w-full transform-gpu"
     >
+      {/* Dotted Background Container */}
       <div
-        className={`flex flex-col md:flex-row items-center justify-center w-full h-full gap-10 lg:gap-16 ${
-          i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-        }`}
+        className="relative h-full rounded-lg sm:rounded-xl overflow-hidden shadow-lg sm:shadow-xl"
+        style={{
+          position: "relative",
+        }}
       >
-        <motion.div
-          className="md:w-1/2 flex justify-center items-center p-4 lg:p-6"
-          whileHover={{ scale: 1.03, rotate: i % 2 === 0 ? 2 : -2 }}
-          transition={{ duration: 0.3 }}
-        >
-          <img
-            src={card.image}
-            alt={card.title}
-            className="w-full h-full max-h-80 object-cover rounded-xl shadow-lg border-4 border-white transform hover:scale-105 transition-transform duration-300 ease-in-out"
-          />
-        </motion.div>
-        <motion.div
-          className="md:w-1/2 p-4 lg:p-6 text-center md:text-left flex flex-col justify-center"
-          initial={{ opacity: 0, x: i % 2 === 0 ? 60 : -60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.5 }}
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 leading-tight drop-shadow-md">
-            {card.title}
-          </h2>
-          <p className="text-xl lg:text-2xl opacity-90 leading-relaxed">
-            {card.description}
-          </p>
-        </motion.div>
+        {/* Dots Background */}
+        <div
+          className="absolute inset-0 rounded-lg sm:rounded-xl"
+          style={{
+            background: `radial-gradient(${dotColor} 1px, transparent 1px)`,
+            backgroundSize: "8px 8px",
+            backgroundPosition: "center",
+            transform: "scale(1.05)", // Slightly larger to extend beyond card
+            zIndex: -1,
+          }}
+        />
+
+        {/* White Background Layer */}
+        <div
+          className="absolute inset-0 bg-white rounded-lg sm:rounded-xl"
+          style={{ zIndex: -1 }}
+        />
+
+        {/* Padding wrapper for responsive padding */}
+        <div className="p-3 sm:p-4 md:p-5 h-full relative z-10">
+          {/* Main Card */}
+          <div className="bg-white h-full rounded-lg sm:rounded-xl overflow-hidden shadow-md sm:shadow-lg flex flex-col">
+            {/* Header */}
+            <motion.div
+              className="px-4 py-3 sm:px-4 sm:py-3 md:px-6 md:py-4 flex items-center justify-between flex-shrink-0"
+              style={{ backgroundColor: headerColor }}
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white m-0 tracking-wide leading-tight">
+                {card.title}
+              </h2>
+              <motion.div
+                className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl cursor-pointer flex-shrink-0 ml-2"
+                whileHover={{ rotate: 90 }}
+                transition={{ duration: 0.3 }}
+              >
+                ⟩
+              </motion.div>
+            </motion.div>
+
+            {/* Content - Changed to flex column on mobile, grid on desktop */}
+            <div className="flex-1 flex flex-col md:grid md:grid-cols-2 md:gap-6 lg:gap-8 p-4 sm:p-4 md:p-6 lg:p-8 overflow-hidden">
+              {/* Text Content - Comes first on mobile */}
+              <motion.div
+                className="flex flex-col justify-center text-center md:text-left order-1 md:order-2 mb-3 md:mb-0"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                {/* Title matching card color */}
+                <h3
+                  className="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-3xl font-bold mb-1 sm:mb-2 md:mb-3 lg:mb-4 tracking-wide leading-tight"
+                  style={{ color: textColor }}
+                >
+                  {card.title}
+                </h3>
+
+                <p className="text-gray-700 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed m-0 px-2 md:px-0">
+                  {card.description}
+                </p>
+
+                {/* Additional content area - Hidden on mobile and tablet, shown only on desktop */}
+                <div className="mt-3 md:mt-6 space-y-2 sm:space-y-3 hidden lg:block">
+                  <p className="text-gray-600 text-base lg:text-lg xl:text-xl">
+                    Our comprehensive approach ensures that every individual
+                    receives the support and resources they need to thrive in
+                    their journey.
+                  </p>
+                  <p className="text-gray-600 text-base lg:text-lg xl:text-xl">
+                    We work closely with community partners and healthcare
+                    providers to create lasting positive change.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Image - Comes second on mobile */}
+              <motion.div
+                className="flex items-center justify-center order-2 md:order-1 mt-1 md:mt-0"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="w-full max-w-xs md:max-w-none h-28 sm:h-32 md:h-40 lg:h-full max-h-40 md:max-h-48 lg:max-h-64 object-cover rounded-md sm:rounded-lg shadow-sm sm:shadow-md"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </div>
       </div>
     </motion.div>
   );
@@ -154,10 +205,10 @@ export default function Services() {
   });
 
   return (
-    <section className="py-28 lg:py-40 bg-gray-100 text-black">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-center mb-16">
-          <h2 className="text-5xl font-bold mt-6 mb-4">
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-40 bg-gray-100 text-black">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
+        <div className="flex justify-center mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-6 mb-0 text-center px-4">
             Our{" "}
             <span className="text-[#A855F7] relative">
               Services
@@ -165,7 +216,14 @@ export default function Services() {
             </span>
           </h2>
         </div>
-        <div ref={containerRef} className="relative h-[400vh]">
+        <p className="mt-0 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center">
+          Discover how our platform has transformed the way people connect and
+          share their stories. Real experiences from real people.
+        </p>
+        <div
+          ref={containerRef}
+          className="relative h-[270vh] sm:h-[300vh] md:h-[400vh]"
+        >
           {serviceCards.map((card, i) => (
             <ServiceCard
               key={card.id}
