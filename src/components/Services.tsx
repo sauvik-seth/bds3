@@ -6,13 +6,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 // Define colors similar to the CSS example but adapted to your LGBTQ+ theme
 const cardColors = [
   "rgba(163, 230, 53, 0.9)", // lime green
-  "rgba(251, 191, 36, 0.9)", // amber
-  "rgba(249, 168, 212, 0.9)", // pink
-  "rgba(147, 51, 234, 0.9)", // purple
-  "rgba(59, 130, 246, 0.9)", // blue
-  "rgba(34, 197, 94, 0.9)", // green
+  "rgba(251, 191, 36, 0.9)",
+  "rgba(249, 168, 212, 0.9)",
+  "rgba(147, 51, 234, 0.9)",
+  "rgba(59, 130, 246, 0.9)",
+  "rgba(34, 197, 94, 0.9)",
 ];
 
+// Each card now has its own `extra` paragraph (desktop-only) [2][7]
 const serviceCards = [
   {
     id: 1,
@@ -20,6 +21,7 @@ const serviceCards = [
     description: "Working to change laws and policies to protect trans rights.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+    extra: "Shaping policies that defend and uplift trans communities.",
   },
   {
     id: 2,
@@ -28,6 +30,8 @@ const serviceCards = [
       "Building a strong, supportive community for trans individuals.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+    extra:
+      "We tailor outreach to local needs, strengthening networks and amplifying marginalized voices.",
   },
   {
     id: 3,
@@ -35,6 +39,8 @@ const serviceCards = [
     description: "Ensuring equitable access to affirming healthcare services.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+    extra:
+      "Navigation support connects individuals with affirming providers, coverage options, and continuity of care.",
   },
   {
     id: 4,
@@ -42,6 +48,8 @@ const serviceCards = [
     description: "Promoting understanding and acceptance through education.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+    extra:
+      "Trainings and resources help institutions reduce stigma and build inclusive cultures.",
   },
   {
     id: 5,
@@ -50,6 +58,8 @@ const serviceCards = [
       "Providing legal assistance and resources for trans individuals.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+    extra:
+      "Guidance on documentation, discrimination claims, and rights protections is readily available.",
   },
   {
     id: 6,
@@ -58,11 +68,14 @@ const serviceCards = [
       "Supporting trans youth and their families with dedicated programs.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+    extra:
+      "Family education and peer groups foster safety, confidence, and belonging for youth.",
   },
-];
+] as const;
 
+// Include optional `extra` in the card prop type [6][8]
 type ServiceCardProps = {
-  card: (typeof serviceCards)[number];
+  card: (typeof serviceCards)[number] & { extra?: string };
   i: number;
   scrollYProgress: any;
   total: number;
@@ -80,7 +93,7 @@ function ServiceCard({ card, i, scrollYProgress, total }: ServiceCardProps) {
   // Extract RGB values for text color matching
   const textColor = headerColor.replace("0.9", "1");
 
-  // Get the dot color (same as header color but with full opacity)
+  // Get the dot color (same as header color but with partial opacity)
   const dotColor = headerColor.replace("0.9", "0.6");
 
   return (
@@ -141,9 +154,9 @@ function ServiceCard({ card, i, scrollYProgress, total }: ServiceCardProps) {
               </motion.div>
             </motion.div>
 
-            {/* Content - Changed to flex column on mobile, grid on desktop */}
+            {/* Content - flex column on mobile, grid on desktop */}
             <div className="flex-1 flex flex-col md:grid md:grid-cols-2 md:gap-6 lg:gap-8 p-4 sm:p-4 md:p-6 lg:p-8 overflow-hidden">
-              {/* Text Content - Comes first on mobile */}
+              {/* Text Content */}
               <motion.div
                 className="flex flex-col justify-center text-center md:text-left order-1 md:order-2 mb-3 md:mb-0"
                 initial={{ opacity: 0, x: 30 }}
@@ -162,21 +175,17 @@ function ServiceCard({ card, i, scrollYProgress, total }: ServiceCardProps) {
                   {card.description}
                 </p>
 
-                {/* Additional content area - Hidden on mobile and tablet, shown only on desktop */}
-                <div className="mt-3 md:mt-6 space-y-2 sm:space-y-3 hidden lg:block">
-                  <p className="text-gray-600 text-base lg:text-lg xl:text-xl">
-                    Our comprehensive approach ensures that every individual
-                    receives the support and resources they need to thrive in
-                    their journey.
-                  </p>
-                  <p className="text-gray-600 text-base lg:text-lg xl:text-xl">
-                    We work closely with community partners and healthcare
-                    providers to create lasting positive change.
-                  </p>
-                </div>
+                {/* Desktop-only extra paragraph per card (hidden on mobile/tablet) */}
+                {card.extra && (
+                  <div className="mt-3 md:mt-6 space-y-2 sm:space-y-3 hidden lg:block">
+                    <p className="text-gray-600 text-base lg:text-lg xl:text-xl">
+                      {card.extra}
+                    </p>
+                  </div>
+                )}
               </motion.div>
 
-              {/* Image - Comes second on mobile */}
+              {/* Image */}
               <motion.div
                 className="flex items-center justify-center order-2 md:order-1 mt-1 md:mt-0"
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -217,8 +226,8 @@ export default function Services() {
           </h2>
         </div>
         <p className="mt-0 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center">
-          Discover how our platform has transformed the way people connect and
-          share their stories. Real experiences from real people.
+          Learn how our services create safer spaces, amplify voices, and fight
+          for equality.
         </p>
         <div
           ref={containerRef}

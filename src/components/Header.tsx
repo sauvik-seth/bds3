@@ -1,15 +1,16 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 
-const Header = () => {
+const HeaderInner = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState("Home");
   const [hoveredItem, setHoveredItem] = useState("Home");
   const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen((v) => !v);
 
   const menuItems = [
     {
@@ -43,16 +44,6 @@ const Header = () => {
       },
     },
     {
-      name: "Events",
-      href: "#events",
-      showcase: {
-        type: "text",
-        content: "Join our events",
-        background:
-          "https://th-i.thgim.com/public/society/3qtx2i/article24408261.ece/alternates/FREE_1200/15SMVIDYA4",
-      },
-    },
-    {
       name: "Contact",
       href: "#contact",
       showcase: {
@@ -64,9 +55,7 @@ const Header = () => {
     },
   ];
 
-  const handleMenuItemHover = (itemName: string) => {
-    setHoveredItem(itemName);
-  };
+  const handleMenuItemHover = (itemName: string) => setHoveredItem(itemName);
 
   const handleMenuItemClick = (itemName: string, href: string) => {
     setActiveMenuItem(itemName);
@@ -74,7 +63,6 @@ const Header = () => {
     navigate(href);
   };
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
     return () => {
@@ -83,230 +71,74 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const currentShowcase = menuItems.find(
-    (item) => item.name === hoveredItem
+    (i) => i.name === hoveredItem
   )?.showcase;
 
   return (
     <>
-      {/* Add Poppins Font + Hamburger Animation Styles + Donate Button Styles + Cool Text Effect */}
+      {/* Restored CSS for hamburger morph + hover effects */}
       <style>{`
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-        .ham {
-          cursor: pointer;
-          -webkit-tap-highlight-color: transparent;
-          transition: transform 400ms;
-          -webkit-user-select: none;
-          user-select: none;
-        }
-        .hamRotate.active {
-          transform: rotate(45deg);
-        }
-        .line {
-          fill:none;
-          transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-          stroke:#000;
-          stroke-width:5.5;
-          stroke-linecap:round;
-        }
-        .ham1 .top {
-          stroke-dasharray: 40 139;
-        }
-        .ham1 .bottom {
-          stroke-dasharray: 40 180;
-        }
-        .ham1.active .top {
-          stroke-dashoffset: -98px;
-        }
-        .ham1.active .bottom {
-          stroke-dashoffset: -138px;
-        }
-        /* Donate Button Styles */
-        .donate-button {
-          all: unset;
-          position: relative;
-          display: inline-flex;
-          height: 3.5rem;
-          align-items: center;
-          border-radius: 9999px;
-          padding-left: 2rem;
-          padding-right: 2rem;
-          font-family: 'Poppins', sans-serif;
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: #fff;
-          letter-spacing: -0.06em;
-          background-color: transparent;
-          cursor: pointer;
-        }
-        .donate-button-bg {
-          overflow: hidden;
-          border-radius: 2rem;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          transform: scale(1);
-          transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
-          border: 1px solid #FFD074;
-          background-color:#A855F7;
-        }
-        .donate-button-bg-layers {
-          position: absolute;
-          left: 50%;
-          transform: translate(-50%);
-          top: -60%;
-          aspect-ratio: 1 / 1;
-          width: max(200%, 10rem);
-          display: block;
-        }
-        .donate-button-bg-layer {
-          border-radius: 9999px;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          transform: scale(0);
-          display: block;
-        }
-        .donate-button-bg-layer-1 {
-          background-color: #A374FF;
-        }
-        .donate-button-bg-layer-2 {
-          background-color: #17F1D1;
-        }
-        .donate-button-bg-layer-3 {
-          background-color: #FFD074;
-        }
-        .donate-button-inner {
-          position: relative;
-          display: block;
-          pointer-events: none;
-        }
-        .donate-button-inner-static {
-          display: block;
-          pointer-events: none;
-        }
-        .donate-button-inner-hover {
-          position: absolute;
-          top: 0;
-          left: 0;
-          opacity: 0;
-          transform: translateY(70%);
-          display: block;
-          pointer-events: none;
-        }
-        .donate-button:hover .donate-button-inner-static {
-          opacity: 0;
-          transform: translateY(-70%);
-          transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
-        }
-        .donate-button:hover .donate-button-inner-hover {
-          opacity: 1;
-          transform: translateY(0);
-          transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .donate-button:hover .donate-button-bg-layer {
-          transition: transform 1.3s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
-        }
-        .donate-button:hover .donate-button-bg-layer-1 {
-          transform: scale(1);
-        }
-        .donate-button:hover .donate-button-bg-layer-2 {
-          transition-delay: 0.1s;
-          transform: scale(1);
-        }
-        .donate-button:hover .donate-button-bg-layer-3 {
-          transition-delay: 0.2s;
-          transform: scale(1);
-        }
-        /* Cool Text Hover Effect - Updated with larger fonts and proper sizing */
-        .cool-text-effect {
-          font-size: 3.5rem;
-          position: relative;
-          text-transform: uppercase;
-          transition: all 300ms ease;
-          width: fit-content;
-          cursor: pointer;
-          display: inline-block;
-          font-weight: 600;
-        }
-        .cool-text-effect:hover {
-          transform: skew(10deg);
-        }
-        .cool-text-effect::before {
-          content: attr(data-name);
-          position: absolute;
-          top: 0;
-          left: -20px;
-          background: white;
-          height: 2.8rem;
-          overflow: hidden;
-          transition: all 300ms ease;
-          padding-left: 20px;
-          color: #A855F7;
-          font-weight: 600;
-          font-size: inherit;
-          text-transform: uppercase;
-        }
-        .cool-text-effect:hover::before {
-          top: -3px;
-          left: 0px;
-          color: #A855F7;
-        }
-        .cool-text-effect::after {
-          content: "";
-          height: 4px;
-          width: 0;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background: #A855F7;
-          transition: all 300ms ease;
-        }
-        .cool-text-effect:hover::after {
-          width: 120%;
-          outline: 5px solid white;
-        }
-        /* Mobile responsive adjustments for cool text effect */
+
+        .ham { cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 400ms; -webkit-user-select: none; user-select: none; }
+        .hamRotate.active { transform: rotate(45deg); }
+        .line { fill: none; transition: stroke-dasharray 400ms, stroke-dashoffset 400ms; stroke: #000; stroke-width: 5.5; stroke-linecap: round; }
+        .ham1 .top { stroke-dasharray: 40 139; }
+        .ham1 .bottom { stroke-dasharray: 40 180; }
+        .ham1.active .top { stroke-dashoffset: -98px; }
+        .ham1.active .bottom { stroke-dashoffset: -138px; }
+
+        .donate-button { all: unset; position: relative; display: inline-flex; height: 3.5rem; align-items: center; border-radius: 9999px; padding-left: 2rem; padding-right: 2rem; font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: -0.06em; background-color: transparent; cursor: pointer; }
+        .donate-button-bg { overflow: hidden; border-radius: 2rem; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: scale(1); transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1); border: 1px solid #FFD074; background-color:#A855F7; }
+        .donate-button-bg-layers { position: absolute; left: 50%; transform: translate(-50%); top: -60%; aspect-ratio: 1 / 1; width: max(200%, 10rem); display: block; }
+        .donate-button-bg-layer { border-radius: 9999px; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: scale(0); display: block; }
+        .donate-button-bg-layer-1 { background-color: #A374FF; }
+        .donate-button-bg-layer-2 { background-color: #17F1D1; }
+        .donate-button-bg-layer-3 { background-color: #FFD074; }
+        .donate-button-inner { position: relative; display: block; pointer-events: none; }
+        .donate-button-inner-static { display: block; pointer-events: none; }
+        .donate-button-inner-hover { position: absolute; top: 0; left: 0; opacity: 0; transform: translateY(70%); display: block; pointer-events: none; }
+        .donate-button:hover .donate-button-inner-static { opacity: 0; transform: translateY(-70%); transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear; }
+        .donate-button:hover .donate-button-inner-hover { opacity: 1; transform: translateY(0); transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1); }
+        .donate-button:hover .donate-button-bg-layer { transition: transform 1.3s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear; }
+        .donate-button:hover .donate-button-bg-layer-1 { transform: scale(1); }
+        .donate-button:hover .donate-button-bg-layer-2 { transition-delay: 0.1s; transform: scale(1); }
+        .donate-button:hover .donate-button-bg-layer-3 { transition-delay: 0.2s; transform: scale(1); }
+
+        .cool-text-effect { font-size: 3.5rem; position: relative; text-transform: uppercase; transition: all 300ms ease; width: fit-content; cursor: pointer; display: inline-block; font-weight: 600; }
+        .cool-text-effect:hover { transform: skew(10deg); }
+        .cool-text-effect::before { content: attr(data-name); position: absolute; top: 0; left: -20px; background: white; height: 2.8rem; overflow: hidden; transition: all 300ms ease; padding-left: 20px; color: #A855F7; font-weight: 600; font-size: inherit; text-transform: uppercase; }
+        .cool-text-effect:hover::before { top: -3px; left: 0px; color: #A855F7; }
+        .cool-text-effect::after { content: ""; height: 4px; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #A855F7; transition: all 300ms ease; }
+        .cool-text-effect:hover::after { width: 120%; outline: 5px solid white; }
+
         @media (max-width: 768px) {
-          .cool-text-effect {
-            font-size: 2.5rem;
-            line-height: 1.1;
-          }
-          
-          .cool-text-effect::before {
-            height: 2rem;
-          }
+          .cool-text-effect { font-size: 2.5rem; line-height: 1.1; }
+          .cool-text-effect::before { height: 2rem; }
         }
-        /* Tablet adjustments */
         @media (min-width: 769px) and (max-width: 1024px) {
-          .cool-text-effect {
-            font-size: 3rem;
-          }
-          
-          .cool-text-effect::before {
-            height: 2.4rem;
-          }
+          .cool-text-effect { font-size: 3rem; }
+          .cool-text-effect::before { height: 2.4rem; }
         }
       `}</style>
 
-      {/* Header */}
+      {/* Header above all content via portal */}
       <header
-        className="fixed top-0 left-1/2 -translate-x-1/2 z-50 bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg transition-opacity duration-300 w-[85%] md:w-[70%] mt-4 rounded-full"
-        style={{ fontFamily: "Poppins, sans-serif" }}
+        className="fixed top-0 left-1/2 -translate-x-1/2 bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg transition-opacity duration-300 w-[85%] md:w-[70%] mt-4 rounded-full"
+        style={{ fontFamily: "Poppins, sans-serif", zIndex: 10000 }}
       >
         <div className="container mx-auto flex items-center justify-between h-20 px-4">
-          {/* Logo */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => navigate("/")}>
+          <div
+            className="flex items-center space-x-3 cursor-pointer"
+            onClick={() => {
+              setIsMenuOpen(false);
+              navigate("/");
+            }}
+          >
             <img src="/logo.png" alt="Logo" className="h-10" />
           </div>
 
-          {/* Center section with Donate Button */}
           <div className="flex items-center space-x-4">
-            {/* Donate Button */}
             <button className="donate-button">
               <span className="donate-button-bg">
                 <span className="donate-button-bg-layers">
@@ -321,11 +153,10 @@ const Header = () => {
               </span>
             </button>
 
-            {/* Hamburger Menu Button */}
             <button
               onClick={toggleMenu}
               aria-label="Toggle menu"
-              className="z-50"
+              aria-expanded={isMenuOpen}
             >
               <svg
                 className={`ham hamRotate ham1 ${isMenuOpen ? "active" : ""}`}
@@ -354,17 +185,17 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Full Screen Menu Overlay */}
+      {/* Full-screen menu overlay kept under header */}
       <div
-        className={`fixed inset-0 z-40 transition-opacity duration-500 ease-in-out ${
+        className={`fixed inset-0 transition-opacity duration-500 ease-in-out ${
           isMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
-        style={{ fontFamily: "Poppins, sans-serif" }}
+        style={{ fontFamily: "Poppins, sans-serif", zIndex: 9000 }}
       >
         <div className="flex h-full">
-          {/* Left Showcase Section */}
+          {/* Left showcase */}
           <div
             className={`hidden md:flex w-1/2 bg-black text-white items-center justify-center relative transition-transform duration-500 ease-out ${
               isMenuOpen ? "translate-x-0" : "-translate-x-full"
@@ -383,7 +214,7 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Right Menu Section */}
+          {/* Right menu */}
           <div
             className={`w-full md:w-1/2 bg-white flex flex-col transition-transform duration-500 ease-out ${
               isMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -394,7 +225,6 @@ const Header = () => {
                 <ul className="space-y-2 md:space-y-1">
                   {menuItems.map((item, index) => (
                     <li key={item.name} className="group">
-                      {/* Mobile Layout */}
                       <div className="md:hidden text-center">
                         <a
                           href={item.href}
@@ -418,7 +248,6 @@ const Header = () => {
                         </a>
                       </div>
 
-                      {/* Desktop Layout */}
                       <div className="hidden md:flex items-center">
                         <div className="w-20 overflow-hidden">
                           <span
@@ -462,6 +291,13 @@ const Header = () => {
       </div>
     </>
   );
+};
+
+const Header = () => {
+  const [mounted, setMounted] = React.useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+  return createPortal(<HeaderInner />, document.body);
 };
 
 export default Header;

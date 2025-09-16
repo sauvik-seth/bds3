@@ -67,8 +67,7 @@ export default function LGBTQTicker() {
           community
         </h2>
         <p className="mt-8 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center">
-          Discover how our platform has transformed the way people connect and
-          share their stories. Real experiences from real people.
+          Embracing love, equality, and diversity — we stand proudly with the LGBTQ+ community to build a world of acceptance, respect, and unity.
         </p>
         <div className="relative">
           {/* Gradient masks for smooth edges */}

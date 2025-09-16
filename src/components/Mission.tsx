@@ -50,9 +50,7 @@ export default function Mission() {
             </h2>
           </div>
           <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center">
-            Standing with LGBTQ+ community Discover how our platform has
-            transformed the way people connect and share their stories. Real
-            experiences from real people.
+            Empowering trans voices, breaking barriers, and building equality for all
           </p>
           <div className="flex justify-center"></div>
           <div className="text-2xl md:text-4xl lg:text-5xl text-center font-medium mt-10 ">

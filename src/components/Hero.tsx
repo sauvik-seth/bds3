@@ -1,4 +1,5 @@
 "use client";
+
 import Pointer from "./Pointer";
 import { motion, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -11,6 +12,22 @@ const PLAY_STORE_URL = "";
 // Change this to match the actual next section background,
 // or set it on the next section container as --next-section-bg.
 const NEXT_SECTION_BG = "#ffffff";
+
+// Symbols to render (Unicode)
+const LGBTQ_SYMBOLS = [
+  "♀",
+  "♂",
+  "⚧",
+  "⚥",
+  "⚢",
+  "⚣",
+  "⚧",
+  "♀",
+  "♂",
+  "⚥",
+  "⚢",
+  "⚣",
+];
 
 export default function Hero() {
   const [leftDesignScope, leftDesignAnimate] = useAnimate();
@@ -39,7 +56,7 @@ export default function Hero() {
       }
 
       try {
-        // Left pointer animation first
+        // Left pointer animation
         leftPointerAnimate([
           [leftPointerScope.current, { opacity: 1 }, { duration: 0.5 }],
           [leftPointerScope.current, { y: 0, x: -100 }, { duration: 0.5 }],
@@ -50,7 +67,7 @@ export default function Hero() {
           ],
         ]);
 
-        // Left image follows the pointer
+        // Left image follows
         leftDesignAnimate([
           [
             leftDesignScope.current,
@@ -60,7 +77,7 @@ export default function Hero() {
           [leftDesignScope.current, { y: 0, x: 0 }, { duration: 0.5 }],
         ]);
 
-        // Right pointer animation with delay
+        // Right pointer animation
         rightPointerAnimate([
           [
             rightPointerScope.current,
@@ -75,7 +92,7 @@ export default function Hero() {
           ],
         ]);
 
-        // Right image follows the pointer
+        // Right image follows
         rightDesignAnimate([
           [
             rightDesignScope.current,
@@ -115,18 +132,84 @@ export default function Hero() {
       style={{ ["--next-section-bg" as any]: NEXT_SECTION_BG }}
       className="relative py-24 overflow-hidden bg-white text-black min-h-screen flex items-center"
     >
-      {/* Animated liquid gradient backdrop (bottom) */}
+      {/* Global CSS for grid + floating symbols */}
+      <style>{`
+        /* Subtle grid lines (transparent base so gradient shows through) */
+        .hero-grid-bg {
+          background-image:
+            repeating-linear-gradient(
+              0deg,
+              rgba(33, 37, 41, 0.06) 0,
+              rgba(33, 37, 41, 0.06) 1px,
+              transparent 1px,
+              transparent 40px
+            ),
+            repeating-linear-gradient(
+              90deg,
+              rgba(33, 37, 41, 0.06) 0,
+              rgba(33, 37, 41, 0.06) 1px,
+              transparent 1px,
+              transparent 40px
+            );
+        }
+
+        /* Floating symbols container */
+        .hero-floating-symbols {
+          color: rgba(33, 37, 41, 0.5);
+          font-family: Inter, system-ui, sans-serif;
+        }
+
+        .hero-floating-symbols span {
+          position: absolute;
+          top: 100vh; /* start below viewport */
+          font-size: clamp(18px, 2.8vw, 56px);
+          opacity: 0.45;
+          filter: saturate(1);
+          text-shadow:
+            0 0 3px rgba(255, 255, 255, 0.7),
+            0 1px 2px rgba(0, 0, 0, 0.18);
+          -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.6);
+          animation: heroFloatY var(--dur, 22s) linear infinite;
+          animation-delay: var(--delay, 0s);
+          will-change: transform;
+          pointer-events: none;
+        }
+
+        /* Distribute with varied speeds/delays */
+        .hero-floating-symbols span:nth-child(1)  { left: 5%;  --dur: 24s; --delay: -2s; }
+        .hero-floating-symbols span:nth-child(2)  { left: 15%; --dur: 28s; --delay: -6s; }
+        .hero-floating-symbols span:nth-child(3)  { left: 25%; --dur: 20s; --delay: -4s; }
+        .hero-floating-symbols span:nth-child(4)  { left: 35%; --dur: 26s; --delay: -10s; }
+        .hero-floating-symbols span:nth-child(5)  { left: 45%; --dur: 22s; --delay: -8s; }
+        .hero-floating-symbols span:nth-child(6)  { left: 55%; --dur: 30s; --delay: -12s; }
+        .hero-floating-symbols span:nth-child(7)  { left: 65%; --dur: 24s; --delay: -14s; }
+        .hero-floating-symbols span:nth-child(8)  { left: 75%; --dur: 26s; --delay: -3s; }
+        .hero-floating-symbols span:nth-child(9)  { left: 85%; --dur: 21s; --delay: -7s; }
+        .hero-floating-symbols span:nth-child(10) { left: 12%; --dur: 27s; --delay: -1s; }
+        .hero-floating-symbols span:nth-child(11) { left: 52%; --dur: 23s; --delay: -9s; }
+        .hero-floating-symbols span:nth-child(12) { left: 82%; --dur: 29s; --delay: -5s; }
+
+        @keyframes heroFloatY {
+          from { transform: translateY(10vh) rotate(0deg); }
+          to   { transform: translateY(-115vh) rotate(360deg); }
+        }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .hero-floating-symbols span { animation: none !important; transform: none !important; }
+        }
+      `}</style>
+
+      {/* Layer 1: Animated liquid gradient (bottom) */}
       <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[65vh] z-0"
         initial={{ opacity: 0.9 }}
         style={{
-          // A vivid multi-color gradient that we animate by shifting background-position.
           background:
             "linear-gradient(120deg, rgba(255,107,157,0.75), rgba(78,205,196,0.75), rgba(255,214,61,0.75), rgba(180,167,214,0.75))",
           backgroundSize: "200% 100%",
           filter: "blur(80px)",
-          // Keep a top fade so the gradient rolls off into the hero content.
           maskImage: "linear-gradient(to top, black 70%, transparent 100%)",
           WebkitMaskImage:
             "linear-gradient(to top, black 70%, transparent 100%)",
@@ -138,25 +221,40 @@ export default function Hero() {
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Bottom edge fader to blend into the next section */}
+      {/* Layer 2: Subtle grid (transparent base so gradient shows through) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[140px] z-20"
+        className="pointer-events-none absolute inset-0 z-10 hero-grid-bg"
+      />
+
+      {/* Layer 3: Floating LGBTQ+ symbols */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-20 hero-floating-symbols"
+      >
+        {LGBTQ_SYMBOLS.map((s, i) => (
+          <span key={i}>{s}</span>
+        ))}
+      </div>
+
+      {/* Bottom edge fader to blend into the next section (highest background layer) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[140px] z-30"
         style={{
-          // Transparent to the exact next section color for a seamless seam.
           background:
             "linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--next-section-bg, #ffffff) 90%)",
         }}
       />
 
-      {/* Content layer above decorative backgrounds */}
+      {/* Foreground content */}
       <div className="container mx-auto px-4 relative w-full">
-        {/* Left image */}
+        {/* Left image (kept) */}
         <motion.div
           ref={leftDesignScope}
           initial={{ opacity: 0, y: 100, x: -100 }}
           animate={{ opacity: 1, y: 0, x: 0 }}
-          className="absolute left-0 xl:left-8 top-16 hidden lg:block cursor-grab active:cursor-grabbing z-10"
+          className="absolute left-0 xl:left-8 top-16 hidden lg:block cursor-grab active:cursor-grabbing z-40"
           drag
         >
           <img
@@ -173,18 +271,18 @@ export default function Hero() {
         <motion.div
           ref={leftPointerScope}
           initial={{ opacity: 0, y: 100, x: -200 }}
-          className="absolute top-96 hidden lg:block z-20"
+          className="absolute top-96 hidden lg:block z-50"
           style={{ left: "calc(14rem + 120px)" }}
         >
           <Pointer name="Community" />
         </motion.div>
 
-        {/* Right image */}
+        {/* Right image (kept) */}
         <motion.div
           initial={{ opacity: 0, y: 100, x: 100 }}
           ref={rightDesignScope}
           animate={{ opacity: 1, y: 0, x: 0 }}
-          className="absolute right-0 xl:right-8 -top-16 hidden lg:block cursor-grab active:cursor-grabbing z-10"
+          className="absolute right-0 xl:right-8 -top-16 hidden lg:block cursor-grab active:cursor-grabbing z-40"
           drag
         >
           <img
@@ -197,16 +295,17 @@ export default function Hero() {
           />
         </motion.div>
 
+        {/* Rights pointer */}
         <motion.div
           ref={rightPointerScope}
           initial={{ opacity: 0, x: 275, y: 100 }}
-          className="absolute -top-4 right-80 xl:right-96 hidden lg:block z-20"
+          className="absolute -top-4 right-80 xl:right-96 hidden lg:block z-50"
         >
           <Pointer color="blue" name="Rights" />
         </motion.div>
 
         {/* Main content */}
-        <div className="flex flex-col items-center justify-center text-center relative z-30 max-w-5xl mx-auto">
+        <div className="flex flex-col items-center justify-center text-center relative z-50 max-w-5xl mx-auto">
           {/* Badge with LGBTQ gradient and noise */}
           <div className="relative inline-flex py-1 px-3 rounded-full text-white font-semibold mb-8 overflow-hidden">
             <div
