@@ -459,7 +459,7 @@ const AllPrograms: React.FC = () => {
           <section key={index} className="program-section">
             <img
               src={image}
-              alt={`Program ${index + 1}`}
+              alt={`Program ${index + 1} thumbnail`}
               width="200"
               height="200"
             />
