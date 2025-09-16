@@ -4,8 +4,6 @@ import Pointer from "./Pointer";
 import { motion, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 
-// Custom cursor SVG inline (black + purple accent for light theme)
-const cursorSvgData = `data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 4L12 20L8 21L7 25L4 4Z' stroke='black' stroke-width='2' fill='%23A855F7'/%3E%3C/svg%3E`;
 
 const PLAY_STORE_URL = "";
 

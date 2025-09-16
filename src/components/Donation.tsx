@@ -38,12 +38,12 @@ const Donation: React.FC = () => {
               <span className="donate-button-inner-hover">Donate Now</span>
             </span>
           </button>
-          <a
-            href="#"
+          <button
             className="bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            onClick={() => {}}
           >
             Learn More
-          </a>
+          </button>
         </div>
       </div>
     </section>

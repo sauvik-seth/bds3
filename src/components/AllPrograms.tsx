@@ -443,7 +443,7 @@ const AllPrograms: React.FC = () => {
       <header className="programs-header">
         <img
           src="https://picsum.photos/400/400?random=1"
-          alt="Header decorative image"
+          alt="Header decoration"
           width="400"
           height="400"
         />
@@ -459,7 +459,7 @@ const AllPrograms: React.FC = () => {
           <section key={index} className="program-section">
             <img
               src={image}
-              alt={`Program ${index + 1} thumbnail`}
+              alt={`Program ${index + 1}`}
               width="200"
               height="200"
             />
