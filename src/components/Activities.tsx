@@ -192,7 +192,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/book1.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -204,7 +205,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/book2.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -216,7 +218,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/book3.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -228,7 +231,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/cg1.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -240,7 +244,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/cg2.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -252,7 +257,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/cg3.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -270,7 +276,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/cg4.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -282,7 +289,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/cg5.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -294,7 +302,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/tdov1.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -306,7 +315,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/tdov2.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -318,7 +328,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/tdov3.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -330,7 +341,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/tdov4.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -348,7 +360,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/tdov5.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -360,7 +373,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/legal1.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -372,7 +386,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/legal2.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -384,7 +399,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/legal3.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -396,7 +412,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/legal4.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -408,7 +425,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/legal5.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -426,7 +444,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/mkrk1.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -438,7 +457,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/mkrk2.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -450,7 +470,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/mkrk3.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -462,7 +483,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/sc1.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -474,7 +496,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/sc2.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
@@ -486,7 +509,8 @@ const Activities: React.FC = () => {
                 <div className="photo__image">
                   <img
                     src="activities/sc3.webp"
-                    alt="see the attached image"
+                    alt=""
+                    aria-hidden="true"
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 499px) 92vw, (max-width: 949px) 46vw, 23vw"
