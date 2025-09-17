@@ -4,7 +4,7 @@ import Pointer from "./Pointer";
 import { motion, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const PLAY_STORE_URL = "";
+const LGBTQ_URL = "";
 
 // Change this to match the actual next section background,
 // or set it on the next section container as --next-section-bg.
@@ -116,11 +116,7 @@ export default function Hero() {
     rightPointerScope,
   ]);
 
-  const handleDownload = () => {
-    if (typeof window !== "undefined") {
-      window.open(PLAY_STORE_URL, "_blank");
-    }
-  };
+
 
   const scrollToFooter = () => {
     const footerElement = document.getElementById("footer");
