@@ -13,67 +13,71 @@ const cardColors = [
   "rgba(34, 197, 94, 0.9)",
 ];
 
-// Each card now has its own `extra` paragraph (desktop-only) [2][7]
+// Each card now has its own `extra` paragraph (desktop-only)
 const serviceCards = [
   {
     id: 1,
-    title: "Advocacy & Policy Reform",
-    description: "Working to change laws and policies to protect trans rights.",
+    title: "Legal Support",
+    description:
+      "Providing legal assistance to transgender individuals facing discrimination or rights violations.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
-    extra: "Shaping policies that defend and uplift trans communities.",
+    extra:
+      "Assistance with name and gender marker updates, anti-discrimination complaints, and access to legal remedies.",
   },
   {
     id: 2,
-    title: "Community Support & Outreach",
+    title: "Awareness Campaigns",
     description:
-      "Building a strong, supportive community for trans individuals.",
+      "Organizing outreach programs to educate society about trans rights and gender diversity.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
     extra:
-      "We tailor outreach to local needs, strengthening networks and amplifying marginalized voices.",
+      "Community toolkits, school and workplace workshops, and partnerships that turn education into action against stigma.",
   },
   {
     id: 3,
-    title: "Healthcare Access",
-    description: "Ensuring equitable access to affirming healthcare services.",
+    title: "Counseling Services",
+    description:
+      "Offering emotional and psychological support tailored for trans persons.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
     extra:
-      "Navigation support connects individuals with affirming providers, coverage options, and continuity of care.",
+      "Affirming, trauma-informed counseling with referrals to licensed providers and crisis options for continuity of care.",
   },
   {
     id: 4,
-    title: "Education & Awareness",
-    description: "Promoting understanding and acceptance through education.",
+    title: "Climate Justice",
+    description:
+      "partnering with trans organic farmers and waste collectors, we ackel issues real.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
     extra:
-      "Trainings and resources help institutions reduce stigma and build inclusive cultures.",
+      "Collaborations with trans farmers and waste workers to build resilient livelihoods, fair pay, and low‑carbon practices.",
   },
   {
     id: 5,
-    title: "Legal Aid & Resources",
+    title: "Trans Work Rights",
     description:
-      "Providing legal assistance and resources for trans individuals.",
+      "Supporting and advocating for equal employment opportunities and workplace protections for trans individuals.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
     extra:
-      "Guidance on documentation, discrimination claims, and rights protections is readily available.",
+      "Support with fair hiring, accommodations, inclusive policies, and redress for harassment or discriminatory practices.",
   },
   {
     id: 6,
-    title: "Youth & Family Programs",
+    title: "Digital Security",
     description:
-      "Supporting trans youth and their families with dedicated programs.",
+      "Providing education and resources for online privacy, security, and digital self-defense for trans people and activists.",
     image:
       "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
     extra:
-      "Family education and peer groups foster safety, confidence, and belonging for youth.",
+      "Hands-on trainings on privacy tools, threat modeling, account hardening, and safe reporting to reduce online risk.",
   },
 ] as const;
 
-// Include optional `extra` in the card prop type [6][8]
+// Include optional `extra` in the card prop type
 type ServiceCardProps = {
   card: (typeof serviceCards)[number] & { extra?: string };
   i: number;

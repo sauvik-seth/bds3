@@ -352,8 +352,8 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg md:text-xl text-black/70 mt-8 max-w-2xl leading-relaxed">
-            Dedicated to advocating, educating, and creating a supportive
-            community for transgender individuals and allies.
+          Our organization is dedicated to advocating for the rights of transgender individuals, working to break down barriers and promote equality in all
+areas of life
           </p>
 
           {/* Button */}
