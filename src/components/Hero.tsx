@@ -4,7 +4,7 @@ import Pointer from "./Pointer";
 import { motion, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const LGBTQ_URL = "";
+
 
 // Change this to match the actual next section background,
 // or set it on the next section container as --next-section-bg.
