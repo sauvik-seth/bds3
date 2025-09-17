@@ -41,7 +41,7 @@ export default function Mission() {
       <div className="container mx-auto">
         <div className="sticky top-28 md:top-32">
           <div className="flex justify-center">
-            <h2 className="text-5xl font-bold mt-6 mb-0">
+            <h2 className="text-4xl font-bold mt-6 mb-0">
               Our{" "}
               <span className="text-[#A855F7] relative">
                 Mission

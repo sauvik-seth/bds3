@@ -63,7 +63,7 @@ const Stories: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto text-center px-4">
-        <h2 className="text-5xl md:text-6xl font-bold mt-6 mb-4">
+        <h2 className="text-4xl md:text-6xl font-bold mt-6 mb-4">
           Our{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 relative">
             Stories

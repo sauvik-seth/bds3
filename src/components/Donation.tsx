@@ -12,7 +12,7 @@ const Donation: React.FC = () => {
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
       `}</style>
       <div className="relative z-10 max-w-6xl mx-auto text-center">
-        <h2 className="text-5xl md:text-6xl font-bold mt-6 mb-4">
+        <h2 className="text-4xl md:text-6xl font-bold mt-6 mb-4">
           Support Our{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 relative">
             LGBTQ+
