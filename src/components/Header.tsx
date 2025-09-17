@@ -20,12 +20,12 @@ const HeaderInner = () => {
         type: "text",
         content: "Welcome Home",
         background:
-          "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fit,w_730,h_488/at%2Freal-estate%2Fpride-flag-on-house",
       },
     },
     {
       name: "About Us",
-      href: "#about",
+      href: "#mission",
       showcase: {
         type: "text",
         content: "Learn about our mission",
@@ -60,7 +60,14 @@ const HeaderInner = () => {
   const handleMenuItemClick = (itemName: string, href: string) => {
     setActiveMenuItem(itemName);
     setIsMenuOpen(false);
-    navigate(href);
+    if (href.startsWith("#")) {
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      navigate(href);
+    }
   };
 
   useEffect(() => {
@@ -139,7 +146,12 @@ const HeaderInner = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <button className="donate-button">
+            <a
+              href="https://forms.gle/nuEvu9EdXZ89SMxd7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="donate-button"
+            >
               <span className="donate-button-bg">
                 <span className="donate-button-bg-layers">
                   <span className="donate-button-bg-layer donate-button-bg-layer-1"></span>
@@ -151,7 +163,7 @@ const HeaderInner = () => {
                 <span className="donate-button-inner-static">Donate Now</span>
                 <span className="donate-button-inner-hover">Donate Now</span>
               </span>
-            </button>
+            </a>
 
             <button
               onClick={toggleMenu}

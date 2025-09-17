@@ -1,9 +1,11 @@
 {
-  "name": "baishamyadurikaronsmiti",
+  "name": "baishamyadurikoronsamiti",
   "version": "0.1.0",
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@formspree/react": "^3.0.0",
+    "@studio-freight/react-lenis": "^0.0.47",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
@@ -15,6 +17,7 @@
     "@types/react-dom": "^19.1.9",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
+    "lenis": "^1.3.11",
     "locomotive-scroll": "^4.1.4",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.544.0",

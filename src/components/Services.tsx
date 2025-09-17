@@ -11,7 +11,7 @@ const cardColors = [
   "rgba(147, 51, 234, 0.9)",
   "rgba(59, 130, 246, 0.9)",
   "rgba(34, 197, 94, 0.9)",
-];
+] as const;
 
 // Each card now has its own `extra` paragraph (desktop-only)
 const serviceCards = [
@@ -21,7 +21,7 @@ const serviceCards = [
     description:
       "Providing legal assistance to transgender individuals facing discrimination or rights violations.",
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+      "https://images.pexels.com/photos/4613907/pexels-photo-4613907.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     extra:
       "Assistance with name and gender marker updates, anti-discrimination complaints, and access to legal remedies.",
   },
@@ -31,7 +31,7 @@ const serviceCards = [
     description:
       "Organizing outreach programs to educate society about trans rights and gender diversity.",
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnBO6O1ALc_86Jqfg1UyVLwP9F-dUNVjNfSA&s",
     extra:
       "Community toolkits, school and workplace workshops, and partnerships that turn education into action against stigma.",
   },
@@ -41,7 +41,7 @@ const serviceCards = [
     description:
       "Offering emotional and psychological support tailored for trans persons.",
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+      "https://images.pexels.com/photos/14640596/pexels-photo-14640596.jpeg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200",
     extra:
       "Affirming, trauma-informed counseling with referrals to licensed providers and crisis options for continuity of care.",
   },
@@ -51,7 +51,7 @@ const serviceCards = [
     description:
       "partnering with trans organic farmers and waste collectors, we ackel issues real.",
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw5QencRV1ErQC4qyyebQPUtZc_iYxbj6Oc3KN4gfSIjttt6SO",
     extra:
       "Collaborations with trans farmers and waste workers to build resilient livelihoods, fair pay, and low‑carbon practices.",
   },
@@ -61,7 +61,7 @@ const serviceCards = [
     description:
       "Supporting and advocating for equal employment opportunities and workplace protections for trans individuals.",
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/D%C3%BCnen_Hvide_Sande_03.jpg/330px-D%C3%BCnen_Hvide_Sande_03.jpg",
     extra:
       "Support with fair hiring, accommodations, inclusive policies, and redress for harassment or discriminatory practices.",
   },
@@ -71,7 +71,7 @@ const serviceCards = [
     description:
       "Providing education and resources for online privacy, security, and digital self-defense for trans people and activists.",
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1770&q=80",
+      "https://images.pexels.com/photos/18087748/pexels-photo-18087748.jpeg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200",
     extra:
       "Hands-on trainings on privacy tools, threat modeling, account hardening, and safe reporting to reduce online risk.",
   },
@@ -125,6 +125,8 @@ function ServiceCard({ card, i, scrollYProgress, total }: ServiceCardProps) {
             backgroundPosition: "center",
             transform: "scale(1.05)", // Slightly larger to extend beyond card
             zIndex: -1,
+            // optional: match outer rounding if desired
+            borderRadius: "1rem",
           }}
         />
 
@@ -140,7 +142,7 @@ function ServiceCard({ card, i, scrollYProgress, total }: ServiceCardProps) {
           <div className="bg-white h-full rounded-lg sm:rounded-xl overflow-hidden shadow-md sm:shadow-lg flex flex-col">
             {/* Header */}
             <motion.div
-              className="px-4 py-3 sm:px-4 sm:py-3 md:px-6 md:py-4 flex items-center justify-between flex-shrink-0"
+              className="px-4 py-3 sm:px-4 sm:py-3 md:px-6 md:py-4 flex items-center justify-between flex-shrink-0 rounded-3xl"
               style={{ backgroundColor: headerColor }}
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -221,12 +223,12 @@ export default function Services() {
     <section className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-40 bg-gray-100 text-black">
       <div className="container mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex justify-center mb-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-6 mb-0 text-center px-4">
+          <h2 className="text-4xl font-bold mt-6 mb-0">
             Our{" "}
             <span className="text-[#A855F7] relative">
               Services
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#A855F7] to-transparent"></span>
-            </span>
+            </span>{" "}
           </h2>
         </div>
         <p className="mt-0 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center">

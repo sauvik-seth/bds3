@@ -4,7 +4,6 @@ import Pointer from "./Pointer";
 import { motion, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 
-
 const PLAY_STORE_URL = "";
 
 // Change this to match the actual next section background,
@@ -120,6 +119,13 @@ export default function Hero() {
   const handleDownload = () => {
     if (typeof window !== "undefined") {
       window.open(PLAY_STORE_URL, "_blank");
+    }
+  };
+
+  const scrollToFooter = () => {
+    const footerElement = document.getElementById("footer");
+    if (footerElement) {
+      footerElement.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -352,8 +358,9 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg md:text-xl text-black/70 mt-8 max-w-2xl leading-relaxed">
-          Our organization is dedicated to advocating for the rights of transgender individuals, working to break down barriers and promote equality in all
-areas of life
+            Our organization is dedicated to advocating for the rights of
+            transgender individuals, working to break down barriers and promote
+            equality in all areas of life
           </p>
 
           {/* Button */}
@@ -380,7 +387,7 @@ areas of life
               )}
 
               <motion.button
-                onClick={isMounted ? handleDownload : undefined}
+                onClick={isMounted ? scrollToFooter : undefined}
                 className="flex items-center bg-white border border-transparent px-7 py-5 rounded-xl text-white shadow-lg relative overflow-hidden"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}

@@ -1,6 +1,6 @@
-# Baishamyadurikaronsmiti - Trans Rights NGO Website
+## baishamyadurikoronsamiti - Trans Rights NGO Website
 
-A premium, modern website for Baishamyadurikaronsmiti, an organization dedicated to advocating for transgender rights and equality.
+A premium, modern website for Baishamyadurikoronsamiti, an organization dedicated to advocating for transgender rights and equality.
 
 ## 🌟 Features
 
@@ -91,4 +91,4 @@ The website is fully responsive and optimized for:
 
 ## 📄 License
 
-This project is created for Baishamyadurikaronsmiti NGO.
+This project is created for Baishamyadurikoronsamiti NGO.

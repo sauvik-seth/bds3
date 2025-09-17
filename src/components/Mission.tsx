@@ -37,20 +37,21 @@ export default function Mission() {
   ];
 
   return (
-    <section className="py-28 lg:py-40">
+    <section id="mission" className="py-28 lg:py-40">
       <div className="container mx-auto">
         <div className="sticky top-28 md:top-32">
           <div className="flex justify-center">
             <h2 className="text-4xl font-bold mt-6 mb-0">
-              Our{" "}
+              About{" "}
               <span className="text-[#A855F7] relative">
-                Mission
+                Us
                 <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#A855F7] to-transparent"></span>
               </span>{" "}
             </h2>
           </div>
           <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center">
-            Empowering trans voices, breaking barriers, and building equality for all
+            Empowering trans voices, breaking barriers, and building equality
+            for all
           </p>
           <div className="flex justify-center"></div>
           <div className="text-2xl md:text-4xl lg:text-5xl text-center font-medium mt-10 ">
