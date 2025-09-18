@@ -1,7 +1,9 @@
 import React from "react";
 import "../styles/Button.css";
+import { useNavigate } from "react-router-dom";
 
 const Activities: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <>
       {/* FIXED: Proper mobile grid that stays within viewport */}
@@ -216,7 +218,7 @@ const Activities: React.FC = () => {
 
         <div className="text-center mt-6 sm:mt-8 mb-12 sm:mb-16 px-4">
           <button
-            onClick={() => (window.location.href = "/all-programs")}
+            onClick={() => navigate("/all-programs")}
             className="donate-button"
           >
             <span className="donate-button-bg">
@@ -227,8 +229,8 @@ const Activities: React.FC = () => {
               </span>
             </span>
             <span className="donate-button-inner">
-              <span className="donate-button-inner-static">All Programs</span>
-              <span className="donate-button-inner-hover">All Programs</span>
+              <span className="donate-button-inner-static">Events</span>
+              <span className="donate-button-inner-hover">Events</span>
             </span>
           </button>
         </div>

@@ -34,7 +34,7 @@ const HeaderInner = () => {
       },
     },
     {
-      name: "Programmes",
+      name: "Events",
       href: "/all-programs",
       showcase: {
         type: "text",

@@ -442,16 +442,16 @@ const AllPrograms: React.FC = () => {
       <ScrollingText />
       <header className="programs-header">
         <img
-          src="https://picsum.photos/400/400?random=1"
+          src="https://img.theweek.in/content/dam/week/news/india/images/2023/4/19/same-sex-marriage2-pti.jpg"
           alt="Header decoration"
           width="400"
           height="400"
         />
         <h1>
           <span aria-hidden="true">Our</span>
-          <span aria-hidden="true">Programs</span>
+          <span aria-hidden="true">Events</span>
           <span aria-hidden="true">Gallery</span>
-          <span className="sr-only">Our Programs Gallery</span>
+          <span className="sr-only">Our Events Gallery</span>
         </h1>
       </header>
       <main className="programs-main">
@@ -464,7 +464,7 @@ const AllPrograms: React.FC = () => {
               height="200"
             />
             <div className="program-description">
-              <h2>Program {index + 1}</h2>
+              <h2>Event {index + 1}</h2>
               <p>
                 This section showcases one of our key programs. Here we can
                 describe the event, its impact, and the community it served.
